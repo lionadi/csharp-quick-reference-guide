@@ -4,156 +4,160 @@
 
 ## Table of Contents
 
-* [Hello World](#hello-world)
-* [Comments](#comments)
-* [Variables](#variables)
-* [By Feature](#by-feature)
-* [Type Conversion](#type-conversion)
-* [Sizeof](#sizeof)   
-* [Operators](#operators)
-* [Decision Making](#decision-making)
-* [Loops](#loops)
-* [Methods](#methods)
-* [Nullables](#nullables)
-* [Arrays](#arrays)
-* [Strings](#strings)
-* [Structures](#structures)
-* [Enums](#enums)
-* [Classes](#classes)
-* [Polymorphism](#polymorphism)
-* [Inheritance](#inheritance)
-* [Abstract](#abstract)
-* [Interface](#interface)
-* [Exception Handling](#exception-handling)
-* [Checked](#checked-and-unchecked)
-* [Delegate](#delegate)
-* [Event](#event)
-* [Explicit](#explicit)       
-* [Extern](#extern)
-* [Fixed](#fixed)
-* [Goto](#goto)
-* [Implicit](#implicit)      
-* [Access Modifiers](#access-modifiers)
-* [Is](#is)
-* [Lock](#lock)     
-* [Override](#override)   
-* [Readonly](#readonly)
-* [Method Parameters](#method-parameters)
-* [Sealed](#sealed)      
-* [Stackalloc](#stackalloc)     
-* [Static](#static)
-* [This](#this)   
-* [Typeof](#typeof)              
-* [Unsafe](#unsafe)         
-* [Using static](#using-static)
-* [Virtual](#virtual)    
-* [Volatile](#volatile)
-* [Generics](#generics)
-* [C# Keywords](#csharp-keywords)
-* [Contextual Keywords](#contextual-keywords)
-* [Contributing](#contributing)
-* [License](#license)
+- [Hello World](#hello-world)
+- [Comments](#comments)
+- [Variables](#variables)
+- [By Feature](#by-feature)
+- [Type Conversion](#type-conversion)
+- [Sizeof](#sizeof)
+- [Operators](#operators)
+- [Decision Making](#decision-making)
+- [Loops](#loops)
+- [Methods](#methods)
+- [Nullables](#nullables)
+- [Arrays](#arrays)
+- [Strings](#strings)
+- [Structures](#structures)
+- [Enums](#enums)
+- [Classes](#classes)
+- [Polymorphism](#polymorphism)
+- [Inheritance](#inheritance)
+- [Abstract](#abstract)
+- [Interface](#interface)
+- [Exception Handling](#exception-handling)
+- [Checked](#checked-and-unchecked)
+- [Delegate](#delegate)
+- [Event](#event)
+- [Explicit](#explicit)
+- [Extern](#extern)
+- [Fixed](#fixed)
+- [Goto](#goto)
+- [Implicit](#implicit)
+- [Access Modifiers](#access-modifiers)
+- [Is](#is)
+- [Lock](#lock)
+- [Override](#override)
+- [Readonly](#readonly)
+- [Method Parameters](#method-parameters)
+- [Sealed](#sealed)
+- [Stackalloc](#stackalloc)
+- [Static](#static)
+- [This](#this)
+- [Typeof](#typeof)
+- [Unsafe](#unsafe)
+- [Using static](#using-static)
+- [Virtual](#virtual)
+- [Volatile](#volatile)
+- [Generics](#generics)
+- [C# Keywords](#csharp-keywords)
+- [Contextual Keywords](#contextual-keywords)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## By Version
 
-* <a name="csharp-2"></a>C# 2.0
-   - [Generics](#generics)
-   - [Partial types](#partial-types)
-   - [Anonymous methods](#anonymous-methods)
-   - [Iterators](#iterators)
-   - [Nullable types](#nullables)
-   - [Getter and setter separate accessibility](#getter-and-setter-separate-accessibility)
-   - [Method group conversions (delegates)](#method-group-conversions)
-   - [Covariance and Contravariance for delegates](#covariance-and-contravariance-for-delegates)
-   - [Static classes](#static)
-   - [Delegate inference](#delegate-inference)
-   - Namespace alias (TODO)
+- <a name="csharp-2"></a>C# 2.0
 
-* <a name="csharp-3"></a>C# 3.0
-   - [Implicitly typed local variables](#implicitly-typed-local-variables)
-   - [Object and collection initializers](#object-and-collection-initializers)
-   - [Auto-Implemented properties](#auto-implemented-properties)
-   - [Anonymous types](#anonymous-types)
-   - [Extension methods](#extension-methods)
-   - [Query expressions](#query-expressions)
-   - [Lambda expressions](#lambda-expressions)
-   - [Expression trees](#expression-trees)
-   - [Partial methods](#partial-methods)
-   
-* <a name="csharp-4"></a>C# 4.0
-   - [Dynamic binding](#dynamic-binding)
-   - [Named and optional arguments](#named-and-optional-arguments)
-   - [Generic co and contravariance](#generic-co-and-contravariance)
-   
-* <a name="csharp-5"></a>C# 5.0
-   - [Asynchronous methods](#asynchronous-methods)
-   - [Caller info attributes](#caller-info-attributes)
+  - [Generics](#generics)
+  - [Partial types](#partial-types)
+  - [Anonymous methods](#anonymous-methods)
+  - [Iterators](#iterators)
+  - [Nullable types](#nullables)
+  - [Getter and setter separate accessibility](#getter-and-setter-separate-accessibility)
+  - [Method group conversions (delegates)](#method-group-conversions)
+  - [Covariance and Contravariance for delegates](#covariance-and-contravariance-for-delegates)
+  - [Static classes](#static)
+  - [Delegate inference](#delegate-inference)
+  - Namespace alias (TODO)
 
-* <a name="csharp-6"></a>C# 6.0
-   - [Compiler as a service Roslyn](#compiler-as-a-service-roslyn)
-   - [Import of static type members into namespace](#import-of-static-type-members-into-namespace)
-   - [Exception filters](#exception-handling)
-   - [Await in catch finally blocks](#await-in-catch-finally-blocks)
-   - [Auto property initializers](#auto-property-initializers)
-   - [Default values for getter only properties](#default-values-for-getter-only-properties)
-   - [Expression-bodied members](#expression-bodied-members)
-   - [Null propagator (null-conditional operator, succinct null checking)](#null-propagator-(null-conditional-operator,-succinct-null-checking))
-   - [String interpolation](#string-interpolation)
-   - [nameof operator](#nameof-operator)
-   - [Dictionary initializer](#dictionary-initializer)
+- <a name="csharp-3"></a>C# 3.0
+  - [Implicitly typed local variables](#implicitly-typed-local-variables)
+  - [Object and collection initializers](#object-and-collection-initializers)
+  - [Auto-Implemented properties](#auto-implemented-properties)
+  - [Anonymous types](#anonymous-types)
+  - [Extension methods](#extension-methods)
+  - [Query expressions](#query-expressions)
+  - [Lambda expressions](#lambda-expressions)
+  - [Expression trees](#expression-trees)
+  - [Partial methods](#partial-methods)
+- <a name="csharp-4"></a>C# 4.0
+  - [Dynamic binding](#dynamic-binding)
+  - [Named and optional arguments](#named-and-optional-arguments)
+  - [Generic co and contravariance](#generic-co-and-contravariance)
+- <a name="csharp-5"></a>C# 5.0
 
-* <a name="csharp-7"></a>C# 7.0
-   - [Out variables](#method-parameters)
-   - [Tuples](#tuples)
-   - Discards (TODO)
-   - [Pattern matching](#pattern-matching)
-   - [Deconstruction](#deconstruction)
-   - Ref returns and locals (TODO)
-   - [Local functions](#local-functions)
-   - More expression-bodied members (TODO)
-   - throw Expressions (TODO)
-   - Generalized async return types (TODO)
-   - Numeric literal syntax improvements (TODO)
+  - [Asynchronous methods](#asynchronous-methods)
+  - [Caller info attributes](#caller-info-attributes)
 
-* <a name="csharp-71"></a>C# 7.1
-   - Async main (TODO)
-   - Default literal expressions (TODO)
-   - Inferred tuple element names (TODO)
+- <a name="csharp-6"></a>C# 6.0
 
-* <a name="csharp-72"></a>C# 7.2
-   - Reference semantics with value types (TODO)
-   - Non-trailing named arguments (TODO)
-   - Leading underscores in numeric literals (TODO)
-   - private protected access modifier (TODO)
-   
-* <a name="csharp-73"></a>C# 7.3
-   - More efficient safe code (TODO)
-   - Existing features better (TODO)
-   
-* <a name="csharp-8"></a>C# 8.0
-   - Readonly members (TODO)
-   - Default interface members (TODO)
-   - Pattern matching enhancements (TODO)
-   - Using declarations (TODO)
-   - Static local functions (TODO)
-   - Disposable ref structs (TODO)
-   - Nullable reference types (TODO)
-   - Asynchronous streams (TODO)
-   - Indices and ranges (TODO)
+  - [Compiler as a service Roslyn](#compiler-as-a-service-roslyn)
+  - [Import of static type members into namespace](#import-of-static-type-members-into-namespace)
+  - [Exception filters](#exception-handling)
+  - [Await in catch finally blocks](#await-in-catch-finally-blocks)
+  - [Auto property initializers](#auto-property-initializers)
+  - [Default values for getter only properties](#default-values-for-getter-only-properties)
+  - [Expression-bodied members](#expression-bodied-members)
+  - [Null propagator (null-conditional operator, succinct null checking)](<#null-propagator-(null-conditional-operator,-succinct-null-checking)>)
+  - [String interpolation](#string-interpolation)
+  - [nameof operator](#nameof-operator)
+  - [Dictionary initializer](#dictionary-initializer)
 
-* <a name="csharp-9"></a>C# 9.0
-   - [Record types](#record-types)
-   - Init only setters (TODO)
-   - [Top-level statements](#top-level-statements)
-   - Pattern matching enhancements (TODO)
-   - Performance and interop (TODO)
-   - Fit and finish features (TODO)
-   - Support for code generators (TODO)
+- <a name="csharp-7"></a>C# 7.0
+
+  - [Out variables](#method-parameters)
+  - [Tuples](#tuples)
+  - [Discards](#discards)
+  - [Pattern matching](#pattern-matching)
+  - [Deconstruction](#deconstruction)
+  - [Ref returns and locals](#ref-returns-and-locals)
+  - [Local functions](#local-functions)
+  - More expression-bodied members (TODO)
+  - throw Expressions (TODO)
+  - Generalized async return types (TODO)
+  - Numeric literal syntax improvements (TODO)
+
+- <a name="csharp-71"></a>C# 7.1
+
+  - Async main (TODO)
+  - Default literal expressions (TODO)
+  - Inferred tuple element names (TODO)
+
+- <a name="csharp-72"></a>C# 7.2
+  - Reference semantics with value types (TODO)
+  - Non-trailing named arguments (TODO)
+  - Leading underscores in numeric literals (TODO)
+  - private protected access modifier (TODO)
+- <a name="csharp-73"></a>C# 7.3
+  - More efficient safe code (TODO)
+  - Existing features better (TODO)
+- <a name="csharp-8"></a>C# 8.0
+
+  - Readonly members (TODO)
+  - Default interface members (TODO)
+  - Pattern matching enhancements (TODO)
+  - Using declarations (TODO)
+  - Static local functions (TODO)
+  - Disposable ref structs (TODO)
+  - Nullable reference types (TODO)
+  - Asynchronous streams (TODO)
+  - Indices and ranges (TODO)
+
+- <a name="csharp-9"></a>C# 9.0
+  - [Record types](#record-types)
+  - Init only setters (TODO)
+  - [Top-level statements](#top-level-statements)
+  - Pattern matching enhancements (TODO)
+  - Performance and interop (TODO)
+  - Fit and finish features (TODO)
+  - Support for code generators (TODO)
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Hello World
+
 <sup>[[Run example](https://repl.it/@andredarcie/Hello-World)]</sup>
+
 ```csharp
 using System;
 namespace HelloWorldApplication
@@ -169,7 +173,9 @@ namespace HelloWorldApplication
 ```
 
 ## Top-level statements
+
 <sup>[[C# 9.0](#csharp-9)]</sup>
+
 ```csharp
 System.Console.WriteLine("Hello World");
 ```
@@ -179,16 +185,19 @@ System.Console.WriteLine("Hello World");
 ## Comments
 
 ```csharp
-/* The 
+/* The
 multiline
 comments */
 
 // Single-line comments
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Variables
+
 <sup>[[Run example](https://repl.it/@andredarcie/Variables)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/types)]</sup>
+
 ```csharp
 class MainClass {
 
@@ -201,25 +210,25 @@ class MainClass {
     bool myBool = true; // True or false
     byte myByte = 255; // 0 to 255
     char myChar = 'a'; // U +0000 to U +ffff
-    decimal myDecimal = 1m; // 128-bit decimal values       
+    decimal myDecimal = 1m; // 128-bit decimal values
     double myDouble = 1d; // 64-bit double-precision
     float myFloat = 1f; // 32-bit single-precision
     int myInt = 1; // -2,147,483,648 to 2,147,483,647
     long myLong = 1L; // 64-bit signed integer type
-    sbyte mySbyte = 1; // -128 to 127                 
-    short myShort = 1; // -32,768 to 32,767 
-    uint myUint = 1; // 0 to 4,294,967,295           
+    sbyte mySbyte = 1; // -128 to 127
+    short myShort = 1; // -32,768 to 32,767
+    uint myUint = 1; // 0 to 4,294,967,295
     ulong myUlong = 1; // 0 to 18,446,744,073,709,551,615
     ushort myUshort = 1; // 0 to 65,535
 
-    // Reference types 
-    dynamic myDynamic = 1; // Bypass compile-time type checking 
+    // Reference types
+    dynamic myDynamic = 1; // Bypass compile-time type checking
     object myObject = new myClass();
     string myString = "test";
 
     // Pointer types
     /*
-    unsafe { 
+    unsafe {
       int* myIntVariable; // Int variable address
     }
     */
@@ -231,6 +240,7 @@ class MainClass {
   delegate void myDelegate();
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Type Conversion
@@ -254,7 +264,8 @@ Convert.ToUInt32(x);     // Converts a type to an unsigned long type
 Convert.ToUInt64(x);     // Converts a type to an unsigned big integer
 ```
 
-* As
+- As
+
 ```csharp
 SomeType x = y as SomeType;
 if (x != null)
@@ -268,15 +279,16 @@ if (x != null)
 ## Sizeof
 
 ```csharp
-// Constant value 4:  
-int intSize = sizeof(int); 
+// Constant value 4:
+int intSize = sizeof(int);
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Operators
 
-* Arithmetic Operators
+- Arithmetic Operators
+
 ```csharp
 x + y   // Adds two operands
 x - y   // Subtracts second operand from the first
@@ -287,7 +299,8 @@ x++     // Increment operator increases integer value by one
 x--     // Decrement operator decreases integer value by one
 ```
 
-* Relational Operators
+- Relational Operators
+
 ```csharp
 (x == y)   // Checks if the values of two operands are equal
 (x != y)   // Checks if the values of two operands are equal or not
@@ -297,15 +310,17 @@ x--     // Decrement operator decreases integer value by one
 (x <= y)   // Checks if the value of left operand is less than or equal to the value of right operand
 ```
 
-* Logical Operators
+- Logical Operators
+
 ```csharp
 (x && y)   // Logical AND operator
 (x || y)   // Logical OR Operator
 !(x || y)  // Logical NOT Operator
 ```
 
-* Overload a built-in operator    
-<sup>[[Run example](https://repl.it/@andredarcie/Overload-a-built-in-operator)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/operator)]</sup>
+- Overload a built-in operator  
+  <sup>[[Run example](https://repl.it/@andredarcie/Overload-a-built-in-operator)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/operator)]</sup>
+
 ```csharp
 using System;
 
@@ -344,8 +359,9 @@ class Fraction
 
 ## Decision Making
 
-* If statement  
-<sup>[[Run example](https://repl.it/@diguifi/Decision-Making-1)]</sup>
+- If statement  
+  <sup>[[Run example](https://repl.it/@diguifi/Decision-Making-1)]</sup>
+
 ```csharp
 if(boolean_expression)
 {
@@ -353,8 +369,9 @@ if(boolean_expression)
 }
 ```
 
-* If else statements  
-<sup>[[Run example](https://repl.it/@diguifi/Decision-Making-2)]</sup>
+- If else statements  
+  <sup>[[Run example](https://repl.it/@diguifi/Decision-Making-2)]</sup>
+
 ```csharp
 if(boolean_expression)
 {
@@ -366,8 +383,9 @@ else
 }
 ```
 
-* If, else if, else statements  
-<sup>[[Run example](https://repl.it/@diguifi/Decision-Making-3)]</sup>
+- If, else if, else statements  
+  <sup>[[Run example](https://repl.it/@diguifi/Decision-Making-3)]</sup>
+
 ```csharp
 if(boolean_expression1)
 {
@@ -383,8 +401,9 @@ else
 }
 ```
 
-* Nested if statements  
-<sup>[[Run example](https://repl.it/@diguifi/Decision-Making-4)]</sup>
+- Nested if statements  
+  <sup>[[Run example](https://repl.it/@diguifi/Decision-Making-4)]</sup>
+
 ```csharp
 if( boolean_expression1)
 {
@@ -396,28 +415,31 @@ if( boolean_expression1)
 }
 ```
 
-* Switch statement  
-<sup>[[Run example](https://repl.it/@diguifi/Decision-Making-5)]</sup>
+- Switch statement  
+  <sup>[[Run example](https://repl.it/@diguifi/Decision-Making-5)]</sup>
+
 ```csharp
 switch(place)
 {
    case 1  :
       Console.WriteLine("First!");
-      break; 
+      break;
    case 2  :
       Console.WriteLine("Second!");
-      break; 
+      break;
    default : /* Optional */
       Console.WriteLine("Invalid place!");
-      break; 
+      break;
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Loops
 
-* While loop  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-1)]</sup>
+- While loop  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-1)]</sup>
+
 ```csharp
 while(condition)
 {
@@ -425,8 +447,9 @@ while(condition)
 }
 ```
 
-* For loop  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-2)]</sup>
+- For loop  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-2)]</sup>
+
 ```csharp
 for (int x = 0; x < 10; x++)
 {
@@ -434,8 +457,9 @@ for (int x = 0; x < 10; x++)
 }
 ```
 
-* Do...while loop  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-3)]</sup>
+- Do...while loop  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-3)]</sup>
+
 ```csharp
 int x = 0;
 
@@ -443,24 +467,26 @@ do
 {
    Console.WriteLine($"value of x: {x}");
    x++;
-} 
+}
 while (x < 10);
 ```
 
-* Nested loops  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-4)]</sup>
+- Nested loops  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-4)]</sup>
+
 ```csharp
 for (int x = 0; x < 10; x++)
 {
-   for (int y = 0; y < 10; y++) 
+   for (int y = 0; y < 10; y++)
    {
       Console.WriteLine($"x: {x}, y: {y}");
    }
 }
 ```
 
-* Break Statement  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-5)]</sup>
+- Break Statement  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-5)]</sup>
+
 ```csharp
 int x = 0;
 
@@ -476,8 +502,9 @@ while (x < 10)
 }
 ```
 
-* Continue Statement  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-6)]</sup>
+- Continue Statement  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-6)]</sup>
+
 ```csharp
 int x = 0;
 
@@ -495,8 +522,9 @@ do
 while (x < 10);
 ```
 
-* Foreach, in  
-<sup>[[Run example](https://repl.it/@diguifi/Loops-7)]</sup>
+- Foreach, in  
+  <sup>[[Run example](https://repl.it/@diguifi/Loops-7)]</sup>
+
 ```csharp
 ArrayList numbers = new ArrayList();
 numbers.Add(1);
@@ -510,9 +538,11 @@ foreach (int number in numbers)
    Console.Write(number + " ");
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Methods
+
 ```csharp
 using System;
 namespace CalculatorApplication
@@ -531,10 +561,13 @@ namespace CalculatorApplication
    }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Nullables
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 int? x = null;
 int? y = 2;
@@ -546,9 +579,11 @@ int?[] arr = new int?[10];
 
 var z = x ?? 10; // Null Coalescing Operator
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Arrays
+
 ```csharp
 double[] balance = new double[10]; // Initializing an Array
 double[] marks = { 1, 2, 3 }; // Assigning Values to an Array
@@ -557,16 +592,20 @@ balance[0] = 10;
 
 var first = balance[0];
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Strings
+
 ```csharp
 string name = "John doe";
 Console.WriteLine("Name: {0}", name);
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Structures
+
 ```csharp
 struct Books
 {
@@ -574,7 +613,7 @@ struct Books
    public string author;
    public string subject;
    public int book_id;
-}; 
+};
 
 Books book1;   /* Declare Book1 of type Book */
 book1.title = "Csharp Programming";
@@ -583,23 +622,27 @@ Console.WriteLine( "Book 1 title : {0}", Book1.title);
 Books book2 = new Books() {title = "Hamlet", author = "William Shakespeare", subject = "tragedy", book_id = 1};
 Console.WriteLine( "Book 1 title : {0}", Book2.title);
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Enums
+
 ```csharp
 enum Days { Sun, Mon, tue, Wed, thu, Fri, Sat };
 
 Console.WriteLine("Monday: {0}", (int)Days.Mon);
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Classes
+
 ```csharp
 class Person
 {
     public string Name { get; set; }
     public int Age { get; set; }
-    
+
     public Person(int age, string name)
     {
         Age = age;
@@ -621,9 +664,11 @@ public class Application
     }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Polymorphism
+
 ```csharp
 public class Shape
 {
@@ -632,7 +677,7 @@ public class Shape
     public int Y { get; private set; }
     public int Height { get; set; }
     public int Width { get; set; }
-   
+
     // Virtual method
     public virtual void Draw()
     {
@@ -659,11 +704,13 @@ class Rectangle : Shape
     }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Inheritance
+
 ```csharp
-class Shape 
+class Shape
 {
    public void setWidth(int w)
    {
@@ -681,14 +728,16 @@ class Shape
 class Rectangle: Shape
 {
    public int getArea()
-   { 
-      return (width * height); 
+   {
+      return (width * height);
    }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Abstract
+
 ```csharp
 abstract class BaseClass
 {
@@ -706,9 +755,11 @@ class DerivedClass : BaseClass
     }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
-## Interface 
+## Interface
+
 ```csharp
 public interface IPerson
 {
@@ -720,7 +771,7 @@ class Person : IPerson
 {
     public string Name { get; set; }
     public int Age { get; set; }
-    
+
     public Person(int age, string name)
     {
         Age = age;
@@ -733,9 +784,11 @@ class Person : IPerson
     }
 }
 ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Exception Handling
+
 ```csharp
 try
 {
@@ -759,11 +812,12 @@ finally
 }
 ```
 
-* Exception filters
-<sup>[[C# 6.0](#csharp-6)]</sup>
+- Exception filters
+  <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 try
-  {	
+  {
     throw new Exception("Exception 1");
   }
   catch(Exception ex) when(ex.Message == "Exception 2")
@@ -778,23 +832,25 @@ try
 
 **[⬆ back to top](#table-of-contents)**
 
-## Checked and Unchecked 
+## Checked and Unchecked
 
-* Checked
+- Checked
+
 ```csharp
 // The following statements are checked by default at compile time. They do not
 // compile.
 int1 = 2147483647 + 10;
 int1 = ConstantMax + 10;
 
-// If the previous sum is attempted in a checked environment, an 
+// If the previous sum is attempted in a checked environment, an
 // OverflowException error is raised.
 
 // Checked expression.
 Console.WriteLine(checked(2147483647 + ten));
 ```
 
-* Unchecked
+- Unchecked
+
 ```csharp
 // The following statements compile and run.
 unchecked
@@ -894,8 +950,8 @@ Celsius c = (Celsius)fahr;
 
 ```csharp
 // Used to declare a method that is implemented externally
-[DllImport("avifil32.dll")]  
-private static extern void AVIFileInit(); 
+[DllImport("avifil32.dll")]
+private static extern void AVIFileInit();
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -903,10 +959,10 @@ private static extern void AVIFileInit();
 ## Fixed
 
 ```csharp
-class Point 
-{ 
+class Point
+{
    public int x;
-   public int y; 
+   public int y;
 }
 
 // Fixed prevents the garbage collector from relocating a movable variable
@@ -1006,7 +1062,7 @@ protected internal // Access is limited to the current assembly or types derived
 
 private // Access is limited to the containing type
 
-private protected // Access is limited to the containing class or types derived from the containing class   
+private protected // Access is limited to the containing class or types derived from the containing class
 // within the current assembly
 ```
 
@@ -1025,24 +1081,24 @@ if (obj is Person) { // Checks if an object is compatible with a given type
 ## Lock
 
 ```csharp
-class Account  
-{  
-    decimal balance;  
-    private Object thisLock = new Object();  
+class Account
+{
+    decimal balance;
+    private Object thisLock = new Object();
 
-    public void Withdraw(decimal amount)  
-    {  
-        lock (thisLock) // Ensures that one thread does not enter a critical section of code 
+    public void Withdraw(decimal amount)
+    {
+        lock (thisLock) // Ensures that one thread does not enter a critical section of code
                         // while another thread is in the critical section.
-        {  
-            if (amount > balance)  
-            {  
-                throw new Exception("Insufficient funds");  
-            }  
-            balance -= amount;  
-        }  
-    }  
-} 
+        {
+            if (amount > balance)
+            {
+                throw new Exception("Insufficient funds");
+            }
+            balance -= amount;
+        }
+    }
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -1066,7 +1122,7 @@ class Square : ShapesClass
     public override int Area() // Overridden implementation
     {
         return side * side;
-    } 
+    }
 }
 ```
 
@@ -1093,7 +1149,8 @@ class Age
 
 ## Method Parameters
 
-* Params
+- Params
+
 ```csharp
 public static void UseParams(params object[] list) // Variable number of arguments.
 {
@@ -1106,7 +1163,8 @@ public static void UseParams(params object[] list) // Variable number of argumen
 UseParams(1, 'a', "test");
 ```
 
-* Ref
+- Ref
+
 ```csharp
 class RefExample
 {
@@ -1124,56 +1182,60 @@ class RefExample
 }
 ```
 
-* Out 
-<sup>[[C# 7.0](#csharp-7)]</sup>
-   - Parameter modifier
-   ```csharp
-   class OutExample
-   {
-      static void Method(out int i)
+- Out
+  <sup>[[C# 7.0](#csharp-7)]</sup>
+
+  - Parameter modifier
+
+  ```csharp
+  class OutExample
+  {
+     static void Method(out int i)
+     {
+        i = 44;
+     }
+
+     static void Main()
+     {
+        int value;
+        Method(out value);
+        Console.WriteLine(value);     // value is now 44
+     }
+  }
+  ```
+
+  - Generic type parameter declarations
+
+  ```csharp
+  // Covariant interface.
+  interface ICovariant<out R> { }
+
+  // Extending covariant interface.
+  interface IExtCovariant<out R> : ICovariant<R> { }
+
+  // Implementing covariant interface.
+  class Sample<R> : ICovariant<R> { }
+
+  class Program
+  {
+      static void Test()
       {
-         i = 44;
+          ICovariant<Object> iobj = new Sample<Object>();
+          ICovariant<String> istr = new Sample<String>();
+
+          // You can assign istr to iobj because
+          // the ICovariant interface is covariant.
+          iobj = istr;
       }
-
-      static void Main()
-      {
-         int value;
-         Method(out value);
-         Console.WriteLine(value);     // value is now 44
-      }
-   }
-   ```
-   - Generic type parameter declarations 
-   ```csharp
-   // Covariant interface.
-   interface ICovariant<out R> { }
-
-   // Extending covariant interface.
-   interface IExtCovariant<out R> : ICovariant<R> { }
-
-   // Implementing covariant interface.
-   class Sample<R> : ICovariant<R> { }
-
-   class Program
-   {
-       static void Test()
-       {
-           ICovariant<Object> iobj = new Sample<Object>();
-           ICovariant<String> istr = new Sample<String>();
-
-           // You can assign istr to iobj because
-           // the ICovariant interface is covariant.
-           iobj = istr;
-       }
-   }
-   ```
+  }
+  ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Sealed
 
 ```csharp
-class A {}      
+class A {}
 sealed class B : A {} // No class can inherit from class B
 
 class X
@@ -1229,10 +1291,10 @@ class Fibonacci
 
 **[⬆ back to top](#table-of-contents)**
 
-## Static 
+## Static
 
 ```csharp
-// Declare a static member, which belongs to the type itself rather than to a specific object. 
+// Declare a static member, which belongs to the type itself rather than to a specific object.
 static class CompanyEmployee
 {
     public static void DoSomething() { /*...*/ }
@@ -1285,10 +1347,10 @@ System.Type type = typeof(int); // System.Int32
 ## Unsafe
 
 ```csharp
-unsafe static void FastCopy(byte[] src, byte[] dst, int count)  
-{  
-    // Unsafe context: can use pointers here.  
-}  
+unsafe static void FastCopy(byte[] src, byte[] dst, int count)
+{
+    // Unsafe context: can use pointers here.
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -1297,14 +1359,14 @@ unsafe static void FastCopy(byte[] src, byte[] dst, int count)
 
 ```csharp
 using static System.Console; // Designates a type whose static members you can
-                             // access without specifying a type name. 
+                             // access without specifying a type name.
 
-class Program 
-{ 
-    static void Main() 
-    { 
+class Program
+{
+    static void Main()
+    {
         WriteLine("Hello world!"); // Without specifying Console
-    } 
+    }
 }
 ```
 
@@ -1364,7 +1426,7 @@ class MyDerivedClass : MyBaseClass
 ```csharp
 class VolatileTest
 {
-    public volatile int i; // Indicates that a field might be modified by multiple 
+    public volatile int i; // Indicates that a field might be modified by multiple
                            // threads that are executing at the same time
 
     public void Test(int _i)
@@ -1376,8 +1438,10 @@ class VolatileTest
 
 **[⬆ back to top](#table-of-contents)**
 
-## Generics 
+## Generics
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 // Declare the generic class.
 public class GenericList<T>
@@ -1403,8 +1467,10 @@ class TestGenericList
 
 **[⬆ back to top](#table-of-contents)**
 
-## Partial Types 
+## Partial Types
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 // Declare first partial class
 public partial class MyClass
@@ -1434,7 +1500,9 @@ public partial class MyClass
 **[⬆ back to top](#table-of-contents)**
 
 ## Anonymous methods
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 // Declare a delegate.
 delegate void Printer(string s);
@@ -1454,13 +1522,15 @@ p("The delegate using the anonymous method is called.");
 **[⬆ back to top](#table-of-contents)**
 
 ## Iterators
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 // Iterator can be used to step through collections such as lists and arrays
 class Department
 {
    private List<Employees> _employees;
-   
+
    public IEnumerator<Employees> GetEnumerator()
    {
       foreach (Employees emp in _employees)
@@ -1481,7 +1551,9 @@ static void Main(string[] args)
 **[⬆ back to top](#table-of-contents)**
 
 ## Getter and setter separate accessibility
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 class Customer
 { // Different accessibility on get and set accessors using accessor-modifier
@@ -1492,7 +1564,9 @@ class Customer
 **[⬆ back to top](#table-of-contents)**
 
 ## Method group conversions
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 // suppose we have a method called RemoveSpaces(string s) and a delegate called Del
 // to assign a method to the delegate:
@@ -1500,7 +1574,9 @@ Del d = RemoveSpaces;
 ```
 
 ## Covariance and Contravariance for delegates
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 static object GetObject() { return null; }
 static void SetObject(object obj) { }
@@ -1520,7 +1596,9 @@ Action<string> del2 = SetObject;
 **[⬆ back to top](#table-of-contents)**
 
 ## Delegate inference
+
 <sup>[[C# 2.0](#csharp-2)]</sup>
+
 ```csharp
 //create a delegate instance without the new keyword part
 delegate void SomeAction();
@@ -1530,7 +1608,9 @@ SomeAction newStyle = SayHello;
 **[⬆ back to top](#table-of-contents)**
 
 ## Implicitly typed local variables
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
 // compiled as an int
 var foo = 5;
@@ -1550,26 +1630,28 @@ var foo =
 // compiled as an anonymous type
 var foo = new { Name = "Terry", Age = 34 };
 
-// compiled as List<int>                             
+// compiled as List<int>
 var foo = new List<int>();
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Object and collection initializers
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
 // Object initializer
 class Customer
 {
    public string Name { get; set; }
-   public int Age { get; set; } 
+   public int Age { get; set; }
 }
 
 Customer foo = new Customer { Name = "Spock", Age = 21 };
 
 // Anonymous object initializer
-var bar = new  { Name = "Spock", Age = 21 }; 
+var bar = new  { Name = "Spock", Age = 21 };
 
 // Collection initializer
 List<Customer> foos = new List<Customer>
@@ -1583,31 +1665,35 @@ List<Customer> foos = new List<Customer>
 **[⬆ back to top](#table-of-contents)**
 
 ## Auto-Implemented properties
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
 class Customer
 {
-    // Auto-Implemented properties for trivial get and set 
+    // Auto-Implemented properties for trivial get and set
    public int CustomerID { get; set; }
-   public string Name { get; set; }   
+   public string Name { get; set; }
 }
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Anonymous Types
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
-// Anonymous types provide a convenient way to encapsulate a set of read-only 
+// Anonymous types provide a convenient way to encapsulate a set of read-only
 // properties into a single object without having to explicitly define a type first
 
-var v = new { Amount = 108, Message = "Hello" };  
-Console.WriteLine(v.Amount + v.Message);  
+var v = new { Amount = 108, Message = "Hello" };
+Console.WriteLine(v.Amount + v.Message);
 
-// Anonymous types typically are used in the select clause of a query expression 
+// Anonymous types typically are used in the select clause of a query expression
 // to return a subset of the properties from each object in the source sequence
 
-var productQuery = 
+var productQuery =
     from prod in products
     select new { prod.Color, prod.Price };
 
@@ -1616,9 +1702,11 @@ var productQuery =
 **[⬆ back to top](#table-of-contents)**
 
 ## Extension Methods
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
-// Extension methods enable you to "add" methods to existing types without 
+// Extension methods enable you to "add" methods to existing types without
 // creating a new derived type, recompiling, or otherwise modifying the original type
 
 namespace ExtensionMethods
@@ -1627,21 +1715,23 @@ namespace ExtensionMethods
     {
         public static int WordCount(this String str)
         {
-            return str.Split(new char[] { ' ', '.', '?' }, 
+            return str.Split(new char[] { ' ', '.', '?' },
                              StringSplitOptions.RemoveEmptyEntries).Length;
         }
-    }   
+    }
 }
 
-string s = "Hello Extension Methods"; 
+string s = "Hello Extension Methods";
 // Extension methods are defined as static methods but are called by using instance method syntax
-int i = s.WordCount();  
+int i = s.WordCount();
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Lambda expressions
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
 // A lambda expression is an anonymous function that you
 // can use to create delegates or expression tree types.
@@ -1650,7 +1740,7 @@ static void Main(string[] args)
 {
     del myDelegate = x => x * x;
     int j = myDelegate(5); //j = 25
-    
+
     Expression<del> myET = x => x * x;
 }
 ```
@@ -1658,22 +1748,26 @@ static void Main(string[] args)
 **[⬆ back to top](#table-of-contents)**
 
 ## Expression trees
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
 // Create an expression using expression lambda
 Expression<Func<int, int, int>> expression = (num1, num2) => num1 + num2;
- 
+
 // Compile the expression
 Func<int, int, int> compiledExpression = expression.Compile();
- 
-// Execute the expression. 
+
+// Execute the expression.
 int result = compiledExpression(3, 4); //return 7
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Partial methods
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
  partial class MyClass
  {
@@ -1695,9 +1789,11 @@ int result = compiledExpression(3, 4); //return 7
 **[⬆ back to top](#table-of-contents)**
 
 ## Query expressions
+
 <sup>[[C# 3.0](#csharp-3)]</sup>
+
 ```csharp
-// A query is a set of instructions that describes what data to retrieve from a given 
+// A query is a set of instructions that describes what data to retrieve from a given
 // data source (or sources) and what shape and organization the returned data should have.
 
 // Data source.
@@ -1714,13 +1810,15 @@ IEnumerable<int> scoreQuery = //query variable
 foreach (int testScore in scoreQuery)
 {
   Console.WriteLine(testScore);
-}                  
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-## Dynamic binding 
+## Dynamic binding
+
 <sup>[[C# 4.0](#csharp-4)]</sup>
+
 ```csharp
 // Dynamic binding refers to delaying the process of type resolution from compile time to runtime.
 
@@ -1738,12 +1836,14 @@ obj.Run(); // Resolves binding on runtime instead of compile time.
 **[⬆ back to top](#table-of-contents)**
 
 ## Named and optional arguments
+
 <sup>[[C# 4.0](#csharp-4)]</sup>
+
 ```csharp
  // Example method
- public static int Sum(int firstNumber, int secondNumber = 1)  
-{  
-    return firstNumber+ secondNumber;  
+ public static int Sum(int firstNumber, int secondNumber = 1)
+{
+    return firstNumber+ secondNumber;
 }
 
 // Passing parameters using the normal way
@@ -1756,35 +1856,39 @@ Sum(firstNumber: 10, secondNumber: 20);
 Sum(10);
 
 // Example method using optional parameters
-public int Sum(int firstNumber, [Optional] int secondNumber)  
-{  
-   return firstNumber + secondNumber;  
-} 
+public int Sum(int firstNumber, [Optional] int secondNumber)
+{
+   return firstNumber + secondNumber;
+}
 
 // Example method using params keyword
-public int Sum(int firstNumber, params int[] numbers)  
-{  
-   int total = 0;  
-   foreach (int number in numbers)  
-   {  
-       number += number;  
-   }  
-   return total + firstNumber;  
-} 
+public int Sum(int firstNumber, params int[] numbers)
+{
+   int total = 0;
+   foreach (int number in numbers)
+   {
+       number += number;
+   }
+   return total + firstNumber;
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Generic co and contravariance
+
 <sup>[[C# 4.0](#csharp-4)]</sup>
-* Covariance
+
+- Covariance
+
 ```csharp
 // Enables you to use a more derived type than originally specified
 IEnumerable<Derived> d = new List<Derived>();
 IEnumerable<Base> b = d;
 ```
 
-* Contravariance
+- Contravariance
+
 ```csharp
 // Enables you to use a more generic (less derived) type than originally specified
 Action<Base> b = (target) => { Console.WriteLine(target.GetType().Name); };
@@ -1795,29 +1899,33 @@ d(new Derived());
 **[⬆ back to top](#table-of-contents)**
 
 ## Caller info attributes
-<sup>[[C# 5.0](#csharp-5)]</sup>
-```csharp
-public void DoProcessing()  
-{  
-    TraceMessage("Something happened.");  
-}  
 
-public void TraceMessage(string message,  
-        [CallerMemberName] string memberName = "",  
-        [CallerFilePath] string sourceFilePath = "",  
-        [CallerLineNumber] int sourceLineNumber = 0)  
-{  
+<sup>[[C# 5.0](#csharp-5)]</sup>
+
+```csharp
+public void DoProcessing()
+{
+    TraceMessage("Something happened.");
+}
+
+public void TraceMessage(string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string sourceFilePath = "",
+        [CallerLineNumber] int sourceLineNumber = 0)
+{
     Trace.WriteLine("message: " + message); // message: Something happened
-    Trace.WriteLine("member name: " + memberName); // member name: DoProcessing  
-    Trace.WriteLine("file path: " + sourceFilePath); // file path: c:\Users\username\Documents\Form1.cs 
-    Trace.WriteLine("source line number: " + sourceLineNumber); // source line number: 31   
-}  
+    Trace.WriteLine("member name: " + memberName); // member name: DoProcessing
+    Trace.WriteLine("file path: " + sourceFilePath); // file path: c:\Users\username\Documents\Form1.cs
+    Trace.WriteLine("source line number: " + sourceLineNumber); // source line number: 31
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Asynchronous methods
+
 <sup>[[C# 5.0](#csharp-5)]</sup>
+
 ```csharp
 // For I/O-bound code, you await an operation which returns a Task or Task<T> inside of an async method.
 private readonly HttpClient _httpClient = new HttpClient();
@@ -1854,7 +1962,9 @@ calculateButton.Clicked += async (o, e) =>
 **[⬆ back to top](#table-of-contents)**
 
 ## Compiler as a service Roslyn
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 // Roslyn provides open-source C# and Visual Basic compilers with rich code analysis APIs.
 
@@ -1863,7 +1973,7 @@ const string programText =
 using System.Collections;
 using System.Linq;
 using System.Text;
- 
+
 namespace HelloWorld
 {
     class Program
@@ -1886,7 +1996,7 @@ WriteLine($"The tree has {root.Members.Count} elements in it.");
 WriteLine($"The tree has {root.Usings.Count} using statements. They are:");
 foreach (UsingDirectiveSyntax element in root.Usings)
     WriteLine($"\t{element.Name}");
-    
+
 // Semantic analysis Querying symbols
 var compilation = CSharpCompilation.Create("HelloWorld")
     .AddReferences(MetadataReference.CreateFromFile(
@@ -1907,9 +2017,11 @@ SymbolInfo nameInfo = model.GetSymbolInfo(systemName);
 **[⬆ back to top](#table-of-contents)**
 
 ## Import of static type members into namespace
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
-// Without using static 
+// Without using static
 using System;
 Math.PI
 
@@ -1921,7 +2033,9 @@ Math.PI
 **[⬆ back to top](#table-of-contents)**
 
 ## Await in catch finally blocks
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 try
 {
@@ -1936,7 +2050,9 @@ catch (ExpectedException ex)
 **[⬆ back to top](#table-of-contents)**
 
 ## Auto property initializers
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 public decimal Price { get; set; } = 0.50m;
 public string Name { get; set; } = "John";
@@ -1945,14 +2061,16 @@ public string Name { get; set; } = "John";
 **[⬆ back to top](#table-of-contents)**
 
 ## Nameof operator
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 class Person {
    public string Name { get; set; }
 }
 
 var person = new Person();
-		
+
 int number = 0;
 string text = "lorem ipsum";
 Console.WriteLine(nameof(number)); // number
@@ -1963,7 +2081,9 @@ Console.WriteLine(nameof(person.Name)); // Name
 **[⬆ back to top](#table-of-contents)**
 
 ## String interpolation
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
 ```
@@ -1971,7 +2091,9 @@ Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} 
 **[⬆ back to top](#table-of-contents)**
 
 ## Expression-bodied members
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 class Person {
   public string FirstName { get; set; }
@@ -1988,7 +2110,9 @@ Console.WriteLine(person.GetFullName());
 **[⬆ back to top](#table-of-contents)**
 
 ## Dictionary initializer
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 var dictionary = new Dictionary<string, int>
 {
@@ -2001,17 +2125,21 @@ var dictionary = new Dictionary<string, int>
 **[⬆ back to top](#table-of-contents)**
 
 ## Null propagator (null-conditional operator, succinct null checking)
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
-int? length = customers?.Length; // null if customers is null   
-Customer first = customers?[0];  // null if customers is null  
-int? count = customers?[0]?.Orders?.Count();  // null if customers, the first customer, or Orders is null  
+int? length = customers?.Length; // null if customers is null
+Customer first = customers?[0];  // null if customers is null
+int? count = customers?[0]?.Orders?.Count();  // null if customers, the first customer, or Orders is null
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Default values for getter only properties
+
 <sup>[[C# 6.0](#csharp-6)]</sup>
+
 ```csharp
 public class Dog
 {
@@ -2030,6 +2158,7 @@ public class Dog
 **[⬆ back to top](#table-of-contents)**
 
 ## Pattern Matching
+
 <sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)]</sup>
 
 Patterns test that a value has a certain shape, and can extract information from the value when it has the matching shape.
@@ -2063,6 +2192,7 @@ public static void SwitchPattern(object o)
 **[⬆ back to top](#table-of-contents)**
 
 ## Tuples
+
 <sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#tuples)]</sup>
 
 Tuples are lightweight data structures that contain multiple fields to represent the data members.
@@ -2078,6 +2208,7 @@ Console.WriteLine($"{alphabetStart.Alpha}, {alphabetStart.Beta}");
 ```
 
 ### Deconstruction
+
 ```csharp
 // There may be times when you want to unpackage the members of a tuple that were returned from a method
 (int max, int min) = Range(numbers);
@@ -2087,7 +2218,140 @@ Console.WriteLine(min);
 
 **[⬆ back to top](#table-of-contents)**
 
+## Discards
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/discards)]</sup>
+
+Discards, which are placeholder variables that are intentionally unused in application code. Discards are equivalent to unassigned variables; they don't have a value. A discard communicates intent to the compiler and others that read your code: You intended to ignore the result of an expression. You may want to ignore the result of an expression, one or more members of a tuple expression, an out parameter to a method, or the target of a pattern matching expression.
+
+Discards make the intent of your code clear. A discard indicates that our code never uses the variable. They enhance its readability and maintainability.
+
+You indicate that a variable is a discard by assigning it the underscore (\_) as its name.
+
+```csharp
+using System;
+
+namespace Discards
+{
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+
+        public Person(string fname, string mname, string lname,
+                      string cityName, string stateName)
+        {
+            FirstName = fname;
+            MiddleName = mname;
+            LastName = lname;
+            City = cityName;
+            State = stateName;
+        }
+
+        // Return the first and last name.
+        public void Deconstruct(out string fname, out string lname)
+        {
+            fname = FirstName;
+            lname = LastName;
+        }
+
+        public void Deconstruct(out string fname, out string mname, out string lname)
+        {
+            fname = FirstName;
+            mname = MiddleName;
+            lname = LastName;
+        }
+
+        public void Deconstruct(out string fname, out string lname,
+                                out string city, out string state)
+        {
+            fname = FirstName;
+            lname = LastName;
+            city = City;
+            state = State;
+        }
+    }
+    class Example
+    {
+        public static void Main()
+        {
+            var p = new Person("John", "Quincy", "Adams", "Boston", "MA");
+
+            // Deconstruct the person object.
+            var (fName, _, city, _) = p;
+            Console.WriteLine($"Hello {fName} of {city}!");
+            // The example displays the following output:
+            //      Hello John of Boston!
+        }
+    }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Ref returns and locals
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/ref-returns)]</sup>
+
+A reference return value allows a method to return a reference to a variable, rather than a value, back to a caller.
+
+The caller can then choose to treat the returned variable as if it were returned by value or by reference. The caller can create a new variable that is itself a reference to the returned value, called a ref local.
+
+**Defining a ref return value**
+
+A method that returns a reference return value must satisfy the following two conditions:
+
+    The method signature includes the ref keyword in front of the return type.
+    Each return statement in the method body includes the ref keyword in front of the name of the returned instance.
+
+**Consuming a ref return value**
+
+The ref return value is an alias to another variable in the called method's scope. You can interpret any use of the ref return as using the variable it aliases:
+
+    When you assign its value, you are assigning a value to the variable it aliases.
+    When you read its value, you are reading the value of the variable it aliases.
+    If you return it by reference, you are returning an alias to that same variable.
+    If you pass it to another method by reference, you are passing a reference to the variable it aliases.
+    When you make a ref local alias, you make a new alias to the same variable.
+
+```csharp
+using System;
+
+class NumberStore
+{
+    int[] numbers = { 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023 };
+
+    public ref int FindNumber(int target)
+    {
+        for (int ctr = 0; ctr < numbers.Length; ctr++)
+        {
+            if (numbers[ctr] >= target)
+                return ref numbers[ctr];
+        }
+        return ref numbers[0];
+    }
+
+    public override string ToString() => string.Join(" ", numbers);
+}
+
+var store = new NumberStore();
+Console.WriteLine($"Original sequence: {store.ToString()}");
+int number = 16;
+ref var value = ref store.FindNumber(number);
+value *= 2;
+Console.WriteLine($"New sequence:      {store.ToString()}");
+// The example displays the following output:
+//       Original sequence: 1 3 7 15 31 63 127 255 511 1023
+//       New sequence:      1 3 7 15 62 63 127 255 511 1023
+```
+
+**[⬆ back to top](#table-of-contents)**
+
 ## Local functions
+
 <sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#local-functions)]</sup>
 
 Local functions enable you to declare methods inside the context of another method.
@@ -2110,6 +2374,7 @@ public static string Sum(int x, int y) {
 **[⬆ back to top](#table-of-contents)**
 
 ## Record types
+
 <sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#record-types)]</sup>
 
 You use the record keyword to define a reference type that provides built-in functionality for encapsulating data.
@@ -2139,7 +2404,7 @@ byte           // Denotes an integral type
 case           // Chooses a single switch section to execute from a list of candidates based on a pattern match
 catch          // Specify handlers for different exceptions
 char           // Represent a Unicode character
-checked        // Used to explicitly enable overflow checking for integral-type arithmetic 
+checked        // Used to explicitly enable overflow checking for integral-type arithmetic
                // operations and conversions
 class          // Create your own custom types by grouping together variables of other types, methods and events
 const          // Declare a constant field or a constant local
@@ -2147,7 +2412,7 @@ continue       // Passes control to the next iteration
 decimal        // Indicates a 128-bit data type
 default        // Can be used in the switch statement or in a default value expression
 delegate       // Type that can be used to encapsulate a named or an anonymous method
-do             // Executes a statement or a block of statements repeatedly until 
+do             // Executes a statement or a block of statements repeatedly until
                // a specified expression evaluates to false
 double         // Simple type that stores 64-bit floating-point values
 else           // Identifies which statement to run based on the value of a Boolean expression
@@ -2159,9 +2424,9 @@ false          // Represents boolean false
 finally        // Can clean up any resources that are allocated in a try block
 fixed          // Prevents the garbage collector from relocating a movable variable
 float          // Signifies a simple type that stores 32-bit floating-point values
-for            // Run a statement or a block of statements repeatedly until 
+for            // Run a statement or a block of statements repeatedly until
                // a specified expression evaluates to false
-foreach, in    // Repeats a group of embedded statements for each element in an array or an object collection 
+foreach, in    // Repeats a group of embedded statements for each element in an array or an object collection
 goto           // Transfers the program control directly to a labeled statement
 if             // Identifies which statement to run based on the value of a Boolean expression
 implicit       // Used to declare an implicit user-defined type conversion operator
@@ -2170,27 +2435,27 @@ int            // Denotes an integral type
 interface      // Contains only the signatures of methods, properties, events or indexers
 internal       // Access modifier fortypes or members are accessible only within files in the same assembly
 is             // Checks if an object is compatible with a given type
-lock           // Marks a statement block as a critical section by obtaining the mutual-exclusion lock 
+lock           // Marks a statement block as a critical section by obtaining the mutual-exclusion lock
                // for a given object, executing a statement, and then releasing the lock
 long           // Denotes an integral type
 namespace      // Keyword is used to declare a scope that contains a set of related objects
 new            // Keyword can be used as an operator, a modifier, or a constraint
                // Operator - create objects and invoke constructors
                // Modifier - hide an inherited member from a base class member
-               // Constraint - restrict types that might be used as arguments for a type parameter 
+               // Constraint - restrict types that might be used as arguments for a type parameter
                //              in a generic declaration
 null           // Is a literal that represents a null reference, one that does not refer to any object
-object         // All types, predefined and user-defined, reference types and value types, inherit 
+object         // All types, predefined and user-defined, reference types and value types, inherit
                // directly or indirectly from Object
 operator       // To overload a built-in operator or to provide a user-defined conversion in a class
                // or struct declaration.
-out            // As a parameter modifier, which lets you pass an argument to a method by reference 
+out            // As a parameter modifier, which lets you pass an argument to a method by reference
                // rather than by value.
-               // Generic type parameter declarations for interfaces and delegates, which specifies that a type 
+               // Generic type parameter declarations for interfaces and delegates, which specifies that a type
                // parameter is covariant
-out            // (generic modifier) Enables you to use a more derived type than that specified 
+out            // (generic modifier) Enables you to use a more derived type than that specified
                // by the generic parameter
-override       // Modifier is required to extend or modify the abstract or virtual implementation of 
+override       // Modifier is required to extend or modify the abstract or virtual implementation of
                // an inherited method, property, indexer, or event
 params         // You can specify a method parameter that takes a variable number of arguments
 private        // Is a member access modifier the least permissive access level
@@ -2204,13 +2469,13 @@ sealed         // Prevents other classes from inheriting from it
 short          // An integral type, signed 16-bit integer
 sizeof         // Obtain the size in bytes for an unmanaged type
 stackalloc     // Is used in an unsafe code context to allocate a block of memory on the stack
-static         // Modifier to declare a static member, which belongs to the type itself rather than 
+static         // Modifier to declare a static member, which belongs to the type itself rather than
                // to a specific object
 string         // Represents a sequence of zero or more Unicode characters
 struct         // Is a value type that is typically used to encapsulate small groups of related variables
-switch         // Is a selection statement that chooses a single switch section to execute from a 
+switch         // Is a selection statement that chooses a single switch section to execute from a
                // list of candidates based on a pattern match with the match expression
-this           // Refers to the current instance of the class and is also used as a modifier of 
+this           // Refers to the current instance of the class and is also used as a modifier of
                // the first parameter of an extension method
 throw          // Signals the occurrence of an exception during program execution
 true           // Represents the boolean value true
@@ -2221,11 +2486,11 @@ ulong          // Denotes an integral type, unsigned 64-bit integer
 unchecked      // Is used to suppress overflow-checking for integral-type arithmetic operations and conversions
 unsafe         // Denotes an unsafe context, which is required for any operation involving pointers
 ushort         // An integral type, unsigned 16-bit integer
-using          // As a directive, when it is used to create an alias for a namespace or to import types 
-               // defined in other namespace. As a statement, when it defines a scope at the end of which 
+using          // As a directive, when it is used to create an alias for a namespace or to import types
+               // defined in other namespace. As a statement, when it defines a scope at the end of which
                // an object will be disposed
 using static   // Designates a type whose static members you can access without specifying a type name
-virtual        // Is used to modify a method, property, indexer, or event declaration and allow for it to 
+virtual        // Is used to modify a method, property, indexer, or event declaration and allow for it to
                // be overridden in a derived class
 void           // Specifies that the method doesn't return a value.
 volatile       // Indicates that a field might be modified by multiple threads that are executing at the same time
