@@ -112,8 +112,8 @@
   - [Deconstruction](#deconstruction)
   - [Ref returns and locals](#ref-returns-and-locals)
   - [Local functions](#local-functions)
-  - More expression-bodied members (TODO)
-  - throw Expressions (TODO)
+  - [More expression-bodied members](#more-expression-bodied-members)
+  - [throw Expressions](#throw-expressions)
   - Generalized async return types (TODO)
   - Numeric literal syntax improvements (TODO)
 
@@ -2369,6 +2369,189 @@ public static string Sum(int x, int y) {
         return result.ToString();
     }
 }
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## More expression-bodied members
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members)]</sup>
+
+Expression body definitions let you provide a member's implementation in a very concise, readable form.
+You can use an expression body definition whenever the logic for any supported member, such as a method or property, consists of a single expression.
+
+An expression body definition has the following general syntax: **member => expression;**
+
+```csharp
+// Methods
+using System;
+
+public class Person
+{
+   public Person(string firstName, string lastName)
+   {
+      fname = firstName;
+      lname = lastName;
+   }
+
+   private string fname;
+   private string lname;
+
+   public override string ToString() => $"{fname} {lname}".Trim();
+   public void DisplayName() => Console.WriteLine(ToString());
+}
+
+class Example
+{
+   static void Main()
+   {
+      Person p = new Person("Mandy", "Dejesus");
+      Console.WriteLine(p);
+      p.DisplayName();
+   }
+}
+
+// Read-only properties
+public class Location
+{
+   private string locationName;
+
+   public Location(string name)
+   {
+      locationName = name;
+   }
+
+   public string Name => locationName;
+}
+
+// Properties
+public class Location
+{
+   private string locationName;
+
+   public Location(string name) => Name = name;
+
+   public string Name
+   {
+      get => locationName;
+      set => locationName = value;
+   }
+}
+
+// Constructors
+public class Location
+{
+   private string locationName;
+
+   public Location(string name) => Name = name;
+
+   public string Name
+   {
+      get => locationName;
+      set => locationName = value;
+   }
+}
+
+// Finalizers
+public class Destroyer
+{
+   public override string ToString() => GetType().Name;
+
+   ~Destroyer() => Console.WriteLine($"The {ToString()} finalizer is executing.");
+}
+
+// Indexers
+using System;
+using System.Collections.Generic;
+
+public class Sports
+{
+   private string[] types = { "Baseball", "Basketball", "Football",
+                              "Hockey", "Soccer", "Tennis",
+                              "Volleyball" };
+
+   public string this[int i]
+   {
+      get => types[i];
+      set => types[i] = value;
+   }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## throw Expressions
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/throw#the-throw-expression)]</sup>
+
+Starting with C# 7.0, throw can be used as an expression as well as a statement. This allows an exception to be thrown in contexts that were previously unsupported.
+
+```csharp
+// the conditional operator
+private static void DisplayFirstNumber(string[] args)
+{
+   string arg = args.Length >= 1 ? args[0] :
+                              throw new ArgumentException("You must supply an argument");
+   if (Int64.TryParse(arg, out var number))
+      Console.WriteLine($"You entered {number:F0}");
+   else
+      Console.WriteLine($"{arg} is not a number.");
+}
+
+// the null-coalescing operator
+public string Name
+{
+    get => name;
+    set => name = value ??
+        throw new ArgumentNullException(paramName: nameof(value), message: "Name cannot be null");
+}
+
+// an expression-bodied lambda or method
+DateTime ToDateTime(IFormatProvider provider) =>
+         throw new InvalidCastException("Conversion to a DateTime is not supported.");
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Generalized async return types
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/async-return-types#generalized-async-return-types-and-valuetasktresult)]</sup>
+
+Generalized async return types enable the compiler to generate async methods that return different types.
+
+Generalized async return types enabled performance improvements in the .NET libraries. Because Task and Task<TResult> are reference types, memory allocation in performance-critical paths, particularly when allocations occur in tight loops, can adversely affect performance.
+
+Support for generalized return types means that you can return a lightweight value type instead of a reference type to avoid additional memory allocations.
+
+```csharp
+class Program
+{
+    static readonly Random s_rnd = new Random();
+
+    static async Task Main() =>
+        Console.WriteLine($"You rolled {await GetDiceRollAsync()}");
+
+    static async ValueTask<int> GetDiceRollAsync()
+    {
+        Console.WriteLine("Shaking dice...");
+
+        int roll1 = await RollAsync();
+        int roll2 = await RollAsync();
+
+        return roll1 + roll2;
+    }
+
+    static async ValueTask<int> RollAsync()
+    {
+        await Task.Delay(500);
+
+        int diceRoll = s_rnd.Next(1, 7);
+        return diceRoll;
+    }
+}
+// Example output:
+//    Shaking dice...
+//    You rolled 8
 ```
 
 **[⬆ back to top](#table-of-contents)**
