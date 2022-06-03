@@ -114,7 +114,7 @@
   - [Local functions](#local-functions)
   - [More expression-bodied members](#more-expression-bodied-members)
   - [throw Expressions](#throw-expressions)
-  - Generalized async return types (TODO)
+  - [Generalized async return types](#generalized-async-return-types)
   - Numeric literal syntax improvements (TODO)
 
 - <a name="csharp-71"></a>C# 7.1
