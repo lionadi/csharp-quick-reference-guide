@@ -115,7 +115,7 @@
   - [More expression-bodied members](#more-expression-bodied-members)
   - [throw Expressions](#throw-expressions)
   - [Generalized async return types](#generalized-async-return-types)
-  - Numeric literal syntax improvements (TODO)
+  - [Numeric literal syntax improvements](#numeric-literal-syntax-improvements)
 
 - <a name="csharp-71"></a>C# 7.1
 
@@ -2552,6 +2552,31 @@ class Program
 // Example output:
 //    Shaking dice...
 //    You rolled 8
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Numeric literal syntax improvements
+
+<sup>[[C# 7.0](#csharp-7)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-7.0/digit-separators)]</sup>
+
+C# 7.0 allows \_ to occur as a digit separator inside number literals:
+
+```csharp
+// decimal notation
+var balance = 2_435_951.68;
+balance += 227_652;
+Debug.WriteLine($"Balance = {balance}.");
+
+// hexadecimal notation
+var num = 0x01_00;
+num += 1;
+Debug.WriteLine($"num = {num}.");
+
+// binary notation
+var num2 = 0b1_0000_0000;
+num2 += 1;
+Debug.WriteLine($"num2 = {num2}.");
 ```
 
 **[⬆ back to top](#table-of-contents)**
