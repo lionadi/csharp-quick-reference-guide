@@ -119,29 +119,29 @@
 
 - <a name="csharp-71"></a>C# 7.1
 
-  - Async main (TODO)
+  - [Async main](#async-main)
   - Default literal expressions (TODO)
-  - Inferred tuple element names (TODO)
+  - [Inferred tuple element names](#inferred-tuple-element-names)
 
 - <a name="csharp-72"></a>C# 7.2
   - Reference semantics with value types (TODO)
-  - Non-trailing named arguments (TODO)
+  - [Non-trailing named arguments](#non-trailing-named-arguments)
   - Leading underscores in numeric literals (TODO)
-  - private protected access modifier (TODO)
+  - [private protected access modifier](#private-protected-access-modifier)
 - <a name="csharp-73"></a>C# 7.3
   - More efficient safe code (TODO)
   - Existing features better (TODO)
 - <a name="csharp-8"></a>C# 8.0
 
-  - Readonly members (TODO)
-  - Default interface members (TODO)
-  - Pattern matching enhancements (TODO)
-  - Using declarations (TODO)
-  - Static local functions (TODO)
-  - Disposable ref structs (TODO)
-  - Nullable reference types (TODO)
-  - Asynchronous streams (TODO)
-  - Indices and ranges (TODO)
+  - [Readonly members](#readonly-members)
+  - [Default interface members](#default-interface-members)
+  - [Pattern matching enhancements](#pattern-matching-enhancements)
+  - [Using declarations](#using-declarations)
+  - [Static local functions](#static-local-functions)
+  - [Disposable ref structs](#disposable-ref-structs)
+  - [Nullable reference types](#nullable-reference-types)
+  - [Asynchronous streams](#asynchronous-streams)
+  - [Indices and ranges](#indices-and-ranges)
 
 - <a name="csharp-9"></a>C# 9.0
   - [Record types](#record-types)
@@ -2577,6 +2577,493 @@ Debug.WriteLine($"num = {num}.");
 var num2 = 0b1_0000_0000;
 num2 += 1;
 Debug.WriteLine($"num2 = {num2}.");
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Async main
+
+<sup>[[C# 7.1](#csharp-71)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line)]</sup>
+
+When you declare an async return value for Main, the compiler generates the boilerplate code for calling asynchronous methods in Main.
+
+```csharp
+static async Task<int> Main(string[] args)
+{
+    return await AsyncConsoleWork();
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Inferred tuple element names
+
+<sup>[[C# 7.1](#csharp-71)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-7.1/infer-tuple-names)]</sup>
+
+When you declare an async return value for Main, the compiler generates the boilerplate code for calling asynchronous methods in Main.
+
+```csharp
+// in 7.0
+public static void Demo()
+{
+    var count = 5;
+    var type = "Orange";
+
+    var tuple = (Count: count, Type: type);
+}
+
+// In 7.1
+public static void Demo()
+{
+    var count = 5;
+    var type = "Orange";
+
+    var tuple = (count, type);
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Non-trailing named arguments
+
+<sup>[[C# 7.2](#csharp-72)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-7.2/non-trailing-named-arguments)]</sup>
+
+An argument with an argument-name is referred to as a named argument, whereas an argument without an argument name is a positional argument. The named arguments free you from matching the order of parameters in the parameter lists of called methods.
+
+    The parameter for each argument can be specified by parameter name.
+
+    Before C# 7.2, when you call a method with named arguments or optional parameters, all the named arguments must be specified at the end of the method signature after all the required arguments.
+
+    It was not allowed to appear a positional argument after a named argument in an argument list.
+
+```csharp
+private static void PrintEmployeeInfo(string name, int age, string address, bool isActive = default, bool isManager = default)
+{
+    Console.WriteLine("Name: {0}, Age: {1}, Address: {2}, Is Active: {3}, Is Manager: {4}", name, age, address, isActive, isManager);
+}
+
+public static void Example()
+{
+    PrintEmployeeInfo("Mark", 24, "22 Ashdown close");
+    PrintEmployeeInfo("John", 31, "9 Ashdown close", true, false);
+    PrintEmployeeInfo(name:"Stella", age:29, address:"32 burak town", isActive:true, isManager:true);
+    PrintEmployeeInfo(age:27, address:"81 wall street", name: "Andy", isManager: true, isActive: true);
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## private protected access modifier
+
+<sup>[[C# 7.2](#csharp-72)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/private-protected)]</sup>
+
+The private protected keyword combination is a member access modifier. A private protected member is accessible by types derived from the containing class, but only within its containing assembly.
+
+```csharp
+public class BaseClass
+{
+    private protected int myValue = 0;
+}
+
+public class DerivedClass1 : BaseClass
+{
+    void Access()
+    {
+        var baseObject = new BaseClass();
+
+        // Error CS1540, because myValue can only be accessed by
+        // classes derived from BaseClass.
+        // baseObject.myValue = 5;
+
+        // OK, accessed through the current derived class instance
+        myValue = 5;
+    }
+}
+
+// Assembly2.cs
+// Compile with: /reference:Assembly1.dll
+class DerivedClass2 : BaseClass
+{
+    void Access()
+    {
+        // Error CS0122, because myValue can only be
+        // accessed by types in Assembly1
+        // myValue = 10;
+    }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Readonly members
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#readonly-members)]</sup>
+
+You can apply the readonly modifier to members of a struct. It indicates that the member doesn't modify state. It's more granular than applying the readonly modifier to a struct declaration.
+
+```csharp
+public class SamplePoint
+{
+    public int x;
+    // Initialize a readonly field
+    public readonly int y = 25;
+    public readonly int z;
+
+    public SamplePoint()
+    {
+        // Initialize a readonly instance field
+        z = 24;
+    }
+
+    public SamplePoint(int p1, int p2, int p3)
+    {
+        x = p1;
+        y = p2;
+        z = p3;
+    }
+
+    public static void Main()
+    {
+        SamplePoint p1 = new SamplePoint(11, 21, 32);   // OK
+        Console.WriteLine($"p1: x={p1.x}, y={p1.y}, z={p1.z}");
+        SamplePoint p2 = new SamplePoint();
+        p2.x = 55;   // OK
+        Console.WriteLine($"p2: x={p2.x}, y={p2.y}, z={p2.z}");
+    }
+    /*
+     Output:
+        p1: x=11, y=21, z=32
+        p2: x=55, y=25, z=24
+    */
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Default interface members
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#default-interface-methods)]</sup>
+
+You can now add members to interfaces and provide an implementation for those members. This language feature enables API authors to add methods to an interface in later versions without breaking source or binary compatibility with existing implementations of that interface. Existing implementations inherit the default implementation. This feature also enables C# to interoperate with APIs that target Android or Swift, which support similar features. Default interface methods also enable scenarios similar to a "traits" language feature.
+
+```csharp
+// Version 1:
+public decimal ComputeLoyaltyDiscount()
+{
+    DateTime TwoYearsAgo = DateTime.Now.AddYears(-2);
+    if ((DateJoined < TwoYearsAgo) && (PreviousOrders.Count() > 10))
+    {
+        return 0.10m;
+    }
+    return 0;
+}
+SampleCustomer c = new SampleCustomer("customer one", new DateTime(2010, 5, 31))
+{
+    Reminders =
+    {
+        { new DateTime(2010, 08, 12), "childs's birthday" },
+        { new DateTime(1012, 11, 15), "anniversary" }
+    }
+};
+
+SampleOrder o = new SampleOrder(new DateTime(2012, 6, 1), 5m);
+c.AddOrder(o);
+
+o = new SampleOrder(new DateTime(2103, 7, 4), 25m);
+c.AddOrder(o);
+
+// Check the discount:
+ICustomer theCustomer = c;
+Console.WriteLine($"Current discount: {theCustomer.ComputeLoyaltyDiscount()}");
+
+// Check the discount:
+ICustomer theCustomer = c;
+Console.WriteLine($"Current discount: {theCustomer.ComputeLoyaltyDiscount()}");
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Pattern matching enhancements
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#more-patterns-in-more-places)]</sup>
+
+C# 8.0 expands this vocabulary so you can use more pattern expressions in more places in your code. Consider these features when your data and functionality are separate. Consider pattern matching when your algorithms depend on a fact other than the runtime type of an object. These techniques provide another way to express designs.
+
+In addition to new patterns in new places, C# 8.0 adds recursive patterns. Recursive patterns are patterns that can contain other patterns.
+
+```csharp
+// switch
+public enum Rainbow
+{
+    Red,
+    Orange,
+    Yellow,
+    Green,
+    Blue,
+    Indigo,
+    Violet
+}
+
+public static RGBColor FromRainbow(Rainbow colorBand) =>
+    colorBand switch
+    {
+        Rainbow.Red    => new RGBColor(0xFF, 0x00, 0x00),
+        Rainbow.Orange => new RGBColor(0xFF, 0x7F, 0x00),
+        Rainbow.Yellow => new RGBColor(0xFF, 0xFF, 0x00),
+        Rainbow.Green  => new RGBColor(0x00, 0xFF, 0x00),
+        Rainbow.Blue   => new RGBColor(0x00, 0x00, 0xFF),
+        Rainbow.Indigo => new RGBColor(0x4B, 0x00, 0x82),
+        Rainbow.Violet => new RGBColor(0x94, 0x00, 0xD3),
+        _              => throw new ArgumentException(message: "invalid enum value", paramName: nameof(colorBand)),
+    };
+
+// Property patterns
+public static decimal ComputeSalesTax(Address location, decimal salePrice) =>
+    location switch
+    {
+        { State: "WA" } => salePrice * 0.06M,
+        { State: "MN" } => salePrice * 0.075M,
+        { State: "MI" } => salePrice * 0.05M,
+        // other cases removed for brevity...
+        _ => 0M
+    };
+
+// Tuple patterns
+public static string RockPaperScissors(string first, string second)
+    => (first, second) switch
+    {
+        ("rock", "paper") => "rock is covered by paper. Paper wins.",
+        ("rock", "scissors") => "rock breaks scissors. Rock wins.",
+        ("paper", "rock") => "paper covers rock. Paper wins.",
+        ("paper", "scissors") => "paper is cut by scissors. Scissors wins.",
+        ("scissors", "rock") => "scissors is broken by rock. Rock wins.",
+        ("scissors", "paper") => "scissors cuts paper. Scissors wins.",
+        (_, _) => "tie"
+    };
+
+// Positional patterns
+public class Point
+{
+    public int X { get; }
+    public int Y { get; }
+
+    public Point(int x, int y) => (X, Y) = (x, y);
+
+    public void Deconstruct(out int x, out int y) =>
+        (x, y) = (X, Y);
+}
+
+public enum Quadrant
+{
+    Unknown,
+    Origin,
+    One,
+    Two,
+    Three,
+    Four,
+    OnBorder
+}
+
+static Quadrant GetQuadrant(Point point) => point switch
+{
+    (0, 0) => Quadrant.Origin,
+    var (x, y) when x > 0 && y > 0 => Quadrant.One,
+    var (x, y) when x < 0 && y > 0 => Quadrant.Two,
+    var (x, y) when x < 0 && y < 0 => Quadrant.Three,
+    var (x, y) when x > 0 && y < 0 => Quadrant.Four,
+    var (_, _) => Quadrant.OnBorder,
+    _ => Quadrant.Unknown
+};
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Using declarations
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#using-declarations)]</sup>
+
+A using declaration is a variable declaration preceded by the using keyword. It tells the compiler that the variable being declared should be disposed at the end of the enclosing scope.
+
+```csharp
+static int WriteLinesToFile(IEnumerable<string> lines)
+{
+    using var file = new System.IO.StreamWriter("WriteLines2.txt");
+    int skippedLines = 0;
+    foreach (string line in lines)
+    {
+        if (!line.Contains("Second"))
+        {
+            file.WriteLine(line);
+        }
+        else
+        {
+            skippedLines++;
+        }
+    }
+    // Notice how skippedLines is in scope here.
+    return skippedLines;
+    // file is disposed here
+}
+
+static int WriteLinesToFile(IEnumerable<string> lines)
+{
+    using (var file = new System.IO.StreamWriter("WriteLines2.txt"))
+    {
+        int skippedLines = 0;
+        foreach (string line in lines)
+        {
+            if (!line.Contains("Second"))
+            {
+                file.WriteLine(line);
+            }
+            else
+            {
+                skippedLines++;
+            }
+        }
+        return skippedLines;
+    } // file is disposed here
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Static local functions
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#static-local-functions)]</sup>
+
+You can now add the static modifier to local functions to ensure that local function doesn't capture (reference) any variables from the enclosing scope. Doing so generates CS8421, "A static local function can't contain a reference to <variable>."
+
+```csharp
+// before
+int M()
+{
+    int y;
+    LocalFunction();
+    return y;
+
+    void LocalFunction() => y = 0;
+}
+
+// after
+int M()
+{
+    int y = 5;
+    int x = 7;
+    return Add(x, y);
+
+    static int Add(int left, int right) => left + right;
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Disposable ref structs
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#disposable-ref-structs)]</sup>
+
+A struct declared with the ref modifier may not implement any interfaces and so can't implement IDisposable. Therefore, to enable a ref struct to be disposed, it must have an accessible void Dispose() method. This feature also applies to readonly ref struct declarations.
+
+```csharp
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Nullable reference types
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types)]</sup>
+
+Nullable reference types are available beginning with C# 8.0, in code that has opted in to a nullable aware context. Nullable reference types, the null static analysis warnings, and the null-forgiving operator are optional language features. All are turned off by default. A nullable context is controlled at the project level using build settings, or in code using pragmas.
+
+In a nullable aware context:
+
+    A variable of a reference type T must be initialized with non-null, and may never be assigned a value that may be null.
+    A variable of a reference type T? may be initialized with null or assigned null, but is required to be checked against null before de-referencing.
+    A variable m of type T? is considered to be non-null when you apply the null-forgiving operator, as in m!.
+
+The distinctions between a non-nullable reference type T and a nullable reference type T? are enforced by the compiler's interpretation of the preceding rules. A variable of type T and a variable of type T? are represented by the same .NET type.
+
+```csharp
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Asynchronous streams
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#asynchronous-streams)]</sup>
+
+Starting with C# 8.0, you can create and consume streams asynchronously. A method that returns an asynchronous stream has three properties:
+
+    It's declared with the async modifier.
+    It returns an IAsyncEnumerable<T>.
+    The method contains yield return statements to return successive elements in the asynchronous stream.
+
+Consuming an asynchronous stream requires you to add the await keyword before the foreach keyword when you enumerate the elements of the stream. Adding the await keyword requires the method that enumerates the asynchronous stream to be declared with the async modifier and to return a type allowed for an async method. Typically that means returning a Task or Task<TResult>. It can also be a ValueTask or ValueTask<TResult>. A method can both consume and produce an asynchronous stream, which means it would return an IAsyncEnumerable<T>.
+
+```csharp
+public static async System.Collections.Generic.IAsyncEnumerable<int> GenerateSequence()
+{
+    for (int i = 0; i < 20; i++)
+    {
+        await Task.Delay(100);
+        yield return i;
+    }
+}
+
+await foreach (var number in GenerateSequence())
+{
+    Console.WriteLine(number);
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Indices and ranges
+
+<sup>[[C# 8.0](#csharp-8)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#indices-and-ranges)]</sup>
+
+Indices and ranges provide a succinct syntax for accessing single elements or ranges in a sequence.
+
+This language support relies on two new types, and two new operators:
+
+    System.Index represents an index into a sequence.
+    The index from end operator ^, which specifies that an index is relative to the end of the sequence.
+    System.Range represents a sub range of a sequence.
+    The range operator .., which specifies the start and end of a range as its operands.
+
+```csharp
+var words = new string[]
+{
+                // index from start    index from end
+    "The",      // 0                   ^9
+    "quick",    // 1                   ^8
+    "brown",    // 2                   ^7
+    "fox",      // 3                   ^6
+    "jumped",   // 4                   ^5
+    "over",     // 5                   ^4
+    "the",      // 6                   ^3
+    "lazy",     // 7                   ^2
+    "dog"       // 8                   ^1
+};              // 9 (or words.Length) ^0
+
+Console.WriteLine($"The last word is {words[^1]}");
+// writes "dog"
+
+var quickBrownFox = words[1..4];
+
+var lazyDog = words[^2..^0];
+
+var allWords = words[..]; // contains "The" through "dog".
+var firstPhrase = words[..4]; // contains "The" through "fox"
+var lastPhrase = words[6..]; // contains "the", "lazy" and "dog"
+
+// You can also declare ranges as variables
+Range phrase = 1..4;
+
+// The range can then be used inside the [ and ] characters
+var text = words[phrase];
 ```
 
 **[⬆ back to top](#table-of-contents)**
