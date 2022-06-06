@@ -145,12 +145,12 @@
 
 - <a name="csharp-9"></a>C# 9.0
   - [Record types](#record-types)
-  - Init only setters (TODO)
+  - [Init only setters](#init-only-setters)
   - [Top-level statements](#top-level-statements)
-  - Pattern matching enhancements (TODO)
-  - Performance and interop (TODO)
-  - Fit and finish features (TODO)
-  - Support for code generators (TODO)
+  - [Pattern matching enhancements](#pattern-matching-enhancements)
+  - [Performance and interop](#performance-and-interop)
+  - [Fit and finish features](#fit-and-finish-features)
+  - [Support for code generators](#support-for-code-generators)
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -3083,6 +3083,102 @@ public static void Main()
     Console.WriteLine(person);
     // output: Person { FirstName = Nancy, LastName = Davolio }
 }
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Init only setters
+
+<sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#init-only-setters)]</sup>
+
+Init only setters provide consistent syntax to initialize members of an object. Property initializers make it clear which value is setting which property. The downside is that those properties must be settable. Starting with C# 9.0, you can create init accessors instead of set accessors for properties and indexers. Callers can use property initializer syntax to set these values in creation expressions, but those properties are readonly once construction has completed. Init only setters provide a window to change state. That window closes when the construction phase ends. The construction phase effectively ends after all initialization, including property initializers and with-expressions have completed.
+
+```csharp
+public struct WeatherObservation
+{
+    public DateTime RecordedAt { get; init; }
+    public decimal TemperatureInCelsius { get; init; }
+    public decimal PressureInMillibars { get; init; }
+
+    public override string ToString() =>
+        $"At {RecordedAt:h:mm tt} on {RecordedAt:M/d/yyyy}: " +
+        $"Temp = {TemperatureInCelsius}, with {PressureInMillibars} pressure";
+}
+
+var now = new WeatherObservation
+{
+    RecordedAt = DateTime.Now,
+    TemperatureInCelsius = 20,
+    PressureInMillibars = 998.0m
+};
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Pattern matching enhancements
+
+<sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#pattern-matching-enhancements)]</sup>
+
+C# 9 includes new pattern matching improvements:
+
+    Type patterns match an object matches a particular type
+    Parenthesized patterns enforce or emphasize the precedence of pattern combinations
+    Conjunctive and patterns require both patterns to match
+    Disjunctive or patterns require either pattern to match
+    Negated not patterns require that a pattern doesn't match
+    Relational patterns require the input be less than, greater than, less than or equal, or greater than or equal to a given constant.
+
+```csharp
+public static bool IsLetter(this char c) =>
+    c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
+
+public static bool IsLetterOrSeparator(this char c) =>
+    c is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') or '.' or ',';
+
+if (e is not null)
+{
+    // ...
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Performance and interop
+
+<sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#performance-and-interop)]</sup>
+
+Three new features improve support for native interop and low-level libraries that require high performance: native sized integers, function pointers, and omitting the localsinit flag.
+
+```csharp
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Fit and finish features
+
+<sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#fit-and-finish-features)]</sup>
+
+Many of the other features help you write code more efficiently. In C# 9.0, you can omit the type in a new expression when the created object's type is already known.
+
+```csharp
+private List<WeatherObservation> _observations = new();
+
+public WeatherForecast ForecastFor(DateTime forecastDate, WeatherForecastOptions options)
+
+var forecast = station.ForecastFor(DateTime.Now.AddDays(2), new());
+
+WeatherStation station = new() { Location = "Seattle, WA" };
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Support for code generators
+
+<sup>[[C# 9.0](#csharp-9)]</sup> <sup>[[Oficial docs](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#support-for-code-generators)]</sup>
+
+```csharp
+
 ```
 
 **[⬆ back to top](#table-of-contents)**
