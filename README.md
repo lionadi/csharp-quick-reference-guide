@@ -152,6 +152,24 @@
   - [Fit and finish features](#fit-and-finish-features)
   - [Support for code generators](#support-for-code-generators)
 
+- <a name="csharp-10"></a>C# 10.0
+  - [Global using directives](#global-using-directives)
+  - [File-scoped Namespace Declaration](#file-scoped-namespace-declaration)
+  - [Implicit Using statements](#implicit-using-statements)
+  - [Custom Interpolated String Handlers](#custom-interpolated-string-handlers)
+  - [Extended Property Patterns](#extended-property-patterns)
+  - [Improvements of Structure Types](#improvements-of-structure-types)
+  - [Lambda Expression Improvements](#lambda-expression-improvements)
+  - [Constant Interpolated Strings](#constant-interpolated-strings)
+  - [Record Types Can Seal ToString](#record-types-can-seal-tostring)
+  - [Assignment Declaration in the Same Deconstruction](#assignment-declaration-in-the-same-deconstruction)
+  - [DateOnly](#dateonly)
+  - [TimeOnly](#timeonly)
+  - [Check Strings for Null](#check-strings-for-null)
+  - [Process Data in Chunks](#process-data-in-chunks)
+  - [LINQ Extensions](#linq-extensions)
+  - [PriorityQueue](#priorityqueue)
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Hello World
@@ -3179,6 +3197,561 @@ WeatherStation station = new() { Location = "Seattle, WA" };
 
 ```csharp
 
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Global using directives
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#global-modifier)]</sup>
+
+Adding the global modifier to a using directive means that using is applied to all files in the compilation (typically a project). 
+
+A global using directive can appear at the beginning of any source code file. All global using directives in a single file must appear before:
+
+    All using directives without the global modifier.
+    All namespace and type declarations in the file.
+
+You may add global using directives to any source file. Typically, you'll want to keep them in a single location. The order of global using directives doesn't matter, either in a single file, or between files.
+
+The global modifier may be combined with the static modifier. The global modifier may be applied to a using alias directive. In both cases, the directive's scope is all files in the current compilation. 
+
+```csharp
+global using static System.Math;
+```
+
+## File-scoped Namespace Declaration
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#file-scoped-namespace-declaration)]</sup>
+
+You can use a new form of the namespace declaration to declare that all declarations that follow are members of the declared namespace:
+
+```csharp
+// Namespace without parentheses but with a semicolon
+namespace Medium;
+public class Program 
+{
+	public static void Main() {
+		Console.WriteLine(new Person( "Mac", "PC"));
+	} 
+}
+
+public record Person(string firstName, string lastName);
+
+```
+
+## Implicit Using statements
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://devblogs.microsoft.com/dotnet/welcome-to-csharp-10/)]</sup>
+
+The Implicit usings feature automatically adds common global using directives for the type of project you are building. To enable implicit usings set the ImplicitUsings property in your .csproj file:
+
+For new projects, this is automatically active.
+
+```xml
+<PropertyGroup>
+    <!-- Other properties like OutputType and TargetFramework -->
+    <ImplicitUsings>enable</ImplicitUsings>
+</PropertyGroup>
+```
+
+Note: You can always check which implicit usings are being generated for your project by navigating to your projects obj directory and finding the generated file named: [Your Projects Name].GlobalUsings.g.cs.
+
+## Custom Interpolated String Handlers
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#interpolated-string-handler)]</sup>
+
+An interpolated string handler is a type that processes the placeholder expression in an interpolated string. Without a custom handler, placeholders are processed similar to String.Format. Each placeholder is formatted as text, and then the components are concatenated to form the resulting string.
+
+```csharp
+
+// Initial Implementation
+public enum LogLevel
+{
+    Off,
+    Critical,
+    Error,
+    Warning,
+    Information,
+    Trace
+}
+
+public class Logger
+{
+    public LogLevel EnabledLevel { get; init; } = LogLevel.Error;
+
+    public void LogMessage(LogLevel level, string msg)
+    {
+        if (EnabledLevel < level) return;
+        Console.WriteLine(msg);
+    }
+}
+
+```
+```csharp
+// Implement the handler pattern
+
+[InterpolatedStringHandler]
+public ref struct LogInterpolatedStringHandler
+{
+    // Storage for the built-up string
+    StringBuilder builder;
+
+    public LogInterpolatedStringHandler(int literalLength, int formattedCount)
+    {
+        builder = new StringBuilder(literalLength);
+        Console.WriteLine($"\tliteral length: {literalLength}, formattedCount: {formattedCount}");
+    }
+
+    public void AppendLiteral(string s)
+    {
+        Console.WriteLine($"\tAppendLiteral called: {{{s}}}");
+        
+        builder.Append(s);
+        Console.WriteLine($"\tAppended the literal string");
+    }
+
+    public void AppendFormatted<T>(T t)
+    {
+        Console.WriteLine($"\tAppendFormatted called: {{{t}}} is of type {typeof(T)}");
+
+        builder.Append(t?.ToString());
+        Console.WriteLine($"\tAppended the formatted object");
+    }
+
+    internal string GetFormattedText() => builder.ToString();
+}
+
+public void LogMessage(LogLevel level, LogInterpolatedStringHandler builder)
+{
+    if (EnabledLevel < level) return;
+    Console.WriteLine(builder.GetFormattedText());
+}
+
+var logger = new Logger() { EnabledLevel = LogLevel.Warning };
+var time = DateTime.Now;
+
+logger.LogMessage(LogLevel.Error, $"Error Level. CurrentTime: {time}. This is an error. It will be printed.");
+logger.LogMessage(LogLevel.Trace, $"Trace Level. CurrentTime: {time}. This won't be printed.");
+logger.LogMessage(LogLevel.Warning, "Warning Level. This warning is a string, not an interpolated string expression.");
+
+```
+
+## Extended Property Patterns
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#extended-property-patterns)]</sup>
+
+You can reference nested properties or fields within a property pattern.
+
+https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/extended-property-patterns
+
+https://code-maze.com/csharp-extended-property-patterns/
+```csharp
+record Order(Payment Payment, Customer Customer);
+record Payment(Price Price, DateTime? PaymentDate = null);
+record Price(string Currency, decimal Amount);
+record Customer(string Name, string Group);
+```
+
+Allow property subpatterns to reference nested members, for instance:
+```csharp
+static class OrderProcessorFactory
+{
+    public static string Get(Order order) => order switch
+    {
+        { Payment.Price.Currency: "BTC" } => "CryptoOrderProcessor",
+        { Customer.Group: "Banking", Payment.Price.Currency: "JPY" } => "JapaneseBankingProcessor",
+        { Payment.Price.Amount: >= 500000 } or { Customer.Group: "VIP" } => "ImportantOrderProcessor",
+        _ => "DefaultOrderProcessor"
+    };
+}
+```
+Instead of:
+```csharp
+public static string GetPreCSharp10Syntax(Order order) => order switch
+{
+    { Payment: {  Price: { Currency: "BTC" } } } => "CryptoOrderProcessor",
+    { Customer: { Group: "Banking" }, Payment: { Price: { Currency: "JPY" } } } => "JapaneseBankingProcessor",
+    { Payment: { Price: { Amount: > 5000000} } } or { Customer: { Group: "VIP" } } => "ImportantOrderProcessor",
+    _ => "DefaultOrderProcessor"
+};
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Improvements of Structure Types
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#improvements-of-structure-types)]</sup>
+
+You can declare an instance parameterless constructor in a structure type and initialize an instance field or property at its declaration. For more information, see the Struct initialization and default values section of the Structure types article.
+
+A left-hand operand of the with expression can be of any structure type or an anonymous (reference) type.
+
+https://code-maze.com/csharp-10-new-features/
+
+```csharp
+public struct Maze
+{
+    // Parameterless constructor with property initialization 
+    public Maze()
+    {
+        Size = 10;
+    }
+    
+    // Initialization of the property at its declaration
+    public int Size { get; set; } = 10;
+}
+```
+
+## Lambda Expression Improvements
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#lambda-expression-improvements)]</sup>
+
+
+Lambda expressions may have a natural type, where the compiler can infer a delegate type from the lambda expression or method group.
+
+Lambda expressions may declare a return type when the compiler can't infer it.
+
+Attributes can be applied to lambda expressions.
+
+These features make lambda expressions more similar to methods and local functions. They make it easier to use lambda expressions without declaring a variable of a delegate type, and they work more seamlessly with the new ASP.NET Core Minimal APIs.
+
+```csharp
+var lambda = [DebuggerStepThrough]() => "Hello world";
+
+// isEven is implicitly of type Func<int, bool>
+var isEven = (int n) => n % 2 == 0;
+
+var oneTwoThreeArray = () => new[]{1, 2, 3}; // inferred type is Func<int[]>
+var oneTwoThreeList = IList<int> () => new[]{1, 2, 3}; // same body, but inferred type is now Func<IList<int>>
+
+```
+
+## Constant Interpolated Strings
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#constant-interpolated-strings)]</sup>
+
+const strings may be initialized using string interpolation if all the placeholders are themselves constant strings. String interpolation can create more readable constant strings as you build constant strings used in your application. The placeholder expressions can't be numeric constants because those constants are converted to strings at run time. The current culture may affect their string representation. 
+
+```csharp
+// https://code-maze.com/csharp-10-new-features/
+const string constantAttribute = "awesome";
+const string constantMessage = $"Code maze is {constantAttribute}.";
+```
+
+## Record Types Can Seal ToString
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#record-types-can-seal-tostring)]</sup>
+
+You can add the sealed modifier when you override ToString in a record type. Sealing the ToString method prevents the compiler from synthesizing a ToString method for any derived record types. A sealed ToString ensures all derived record types use the ToString method defined in a common base record type. You can learn more about this feature in the article on records.
+
+```csharp
+public record Article(string Author, string Title)
+{
+    public sealed override string ToString()
+    {
+        return $"{Author}: {Title}";
+    }
+}
+```
+
+## Assignment Declaration in the Same Deconstruction
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#assignment-and-declaration-in-same-deconstruction)]</sup>
+
+This change removes a restriction from earlier versions of C#. Previously, a deconstruction could assign all values to existing variables, or initialize newly declared variables:
+
+```csharp
+// Initialization:
+(int x, int y) = point;
+
+// assignment:
+int x1 = 0;
+int y1 = 0;
+(x1, y1) = point;
+```
+C# 10 removes this restriction:
+```csharp
+int x = 0;
+(x, int y) = point;
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## DateOnly
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/standard/datetime/how-to-use-dateonly-timeonly#the-dateonly-structure)]</sup>
+
+The DateOnly structure represents a specific date, without time. Since it has no time component, it represents a date from the start of the day to the end of the day. This structure is ideal for storing specific dates, such as a birth date, an anniversary date, or business-related dates.
+
+Although you could use DateTime while ignoring the time component, there are a few benefits to using DateOnly over DateTime:
+
+* The DateTime structure may roll into the previous or next day if it's offset by a time zone. DateOnly can't be offset by a time zone, and it always represents the date that was set.
+
+* Serializing a DateTime structure includes the time component, which may obscure the intent of the data. Also, DateOnly serializes less data.
+
+* When code interacts with a database, such as SQL Server, whole dates are generally stored as the date data type, which doesn't include a time. DateOnly matches the database type better.
+
+DateOnly has a range from 0001-01-01 through 9999-12-31, just like DateTime. You can specify a specific calendar in the DateOnly constructor. However, a DateOnly object always represents a date in the proleptic Gregorian calendar, regardless of which calendar was used to construct it. 
+
+```csharp
+// Add or subtract days, months, years
+var theDate = new DateOnly(2015, 10, 21);
+
+var nextDay = theDate.AddDays(1);
+var previousDay = theDate.AddDays(-1);
+var decadeLater = theDate.AddYears(10);
+var lastMonth = theDate.AddMonths(-1);
+
+Console.WriteLine($"Date: {theDate}");
+Console.WriteLine($" Next day: {nextDay}");
+Console.WriteLine($" Previous day: {previousDay}");
+Console.WriteLine($" Decade later: {decadeLater}");
+Console.WriteLine($" Last month: {lastMonth}");
+
+/* This example produces the following output:
+ * 
+ * Date: 10/21/2015
+ *  Next day: 10/22/2015
+ *  Previous day: 10/20/2015
+ *  Decade later: 10/21/2025
+ *  Last month: 9/21/2015
+*/
+
+// Parse and format DateOnly
+var theDate = DateOnly.ParseExact("21 Oct 2015", "dd MMM yyyy", CultureInfo.InvariantCulture);  // Custom format
+var theDate2 = DateOnly.Parse("October 21, 2015", CultureInfo.InvariantCulture);
+
+Console.WriteLine(theDate.ToString("m", CultureInfo.InvariantCulture));     // Month day pattern
+Console.WriteLine(theDate2.ToString("o", CultureInfo.InvariantCulture));    // ISO 8601 format
+Console.WriteLine(theDate2.ToLongDateString());
+
+/* This example produces the following output:
+ * 
+ * October 21
+ * 2015-10-21
+ * Wednesday, October 21, 2015
+*/
+
+// Compare DateOnly
+var theDate = DateOnly.ParseExact("21 Oct 2015", "dd MMM yyyy", CultureInfo.InvariantCulture);  // Custom format
+var theDate2 = DateOnly.Parse("October 21, 2015", CultureInfo.InvariantCulture);
+var dateLater = theDate.AddMonths(6);
+var dateBefore = theDate.AddDays(-10);
+
+Console.WriteLine($"Consider {theDate}...");
+Console.WriteLine($" Is '{nameof(theDate2)}' equal? {theDate == theDate2}");
+Console.WriteLine($" Is {dateLater} after? {dateLater > theDate} ");
+Console.WriteLine($" Is {dateLater} before? {dateLater < theDate} ");
+Console.WriteLine($" Is {dateBefore} after? {dateBefore > theDate} ");
+Console.WriteLine($" Is {dateBefore} before? {dateBefore < theDate} ");
+
+/* This example produces the following output:
+ * 
+ * Consider 10/21/2015
+ *  Is 'theDate2' equal? True
+ *  Is 4/21/2016 after? True
+ *  Is 4/21/2016 before? False
+ *  Is 10/11/2015 after? False
+ *  Is 10/11/2015 before? True
+*/
+
+```
+
+## TimeOnly
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/standard/datetime/how-to-use-dateonly-timeonly#the-timeonly-structure)]</sup>
+
+The TimeOnly structure represents a time-of-day value, such as a daily alarm clock or what time you eat lunch each day. TimeOnly is limited to the range of 00:00:00.0000000 - 23:59:59.9999999, a specific time of day.
+
+Prior to the TimeOnly type being introduced, programmers typically used either the DateTime type or the TimeSpan type to represent a specific time. However, using these structures to simulate a time without a date may introduce some problems, which TimeOnly solves:
+
+* TimeSpan represents elapsed time, such as time measured with a stopwatch. The upper range is more than 29,000 years, and its value can be negative to indicate moving backwards in time. A negative TimeSpan doesn't indicate a specific time of the day.
+
+* If TimeSpan is used as a time of day, there's a risk that it could be manipulated to a value outside of the 24-hour day. TimeOnly doesn't have this risk. For example, if an employee's work shift starts at 18:00 and lasts for 8 hours, adding 8 hours to the TimeOnly structure rolls over to 2:00
+
+* Using DateTime for a time of day requires that an arbitrary date be associated with the time, and then later disregarded. It's common practice to choose DateTime.MinValue (0001-01-01) as the date, however, if hours are subtracted from the DateTime value, an OutOfRange exception might occur. TimeOnly doesn't have this problem as the time rolls forwards and backwards around the 24-hour timeframe.
+
+* Serializing a DateTime structure includes the date component, which may obscure the intent of the data. Also, TimeOnly serializes less data.
+
+
+```csharp
+// Add or subtract time
+var theTime = new TimeOnly(7, 23, 11);
+
+var hourLater = theTime.AddHours(1);
+var minutesBefore = theTime.AddMinutes(-12);
+var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));
+var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);
+var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);
+
+Console.WriteLine($"Time: {theTime}");
+Console.WriteLine($" Hours later: {hourLater}");
+Console.WriteLine($" Minutes before: {minutesBefore}");
+Console.WriteLine($" Seconds after: {secondsAfter}");
+Console.WriteLine($" {daysLater} is the time, which is {wrappedDays} days later");
+Console.WriteLine($" {daysBehind} is the time, which is {wrappedDaysFromHours} days prior");
+
+/* This example produces the following output:
+ * 
+ * Time: 7:23 AM
+ *  Hours later: 8:23 AM
+ *  Minutes before: 7:11 AM
+ *  Seconds after: 7:23 AM
+ *  7:44 AM is the time, which is 1 days later 
+ *  1:23 AM is the time, which is -9 days prior
+*/
+
+// Parse and format TimeOnly
+var theTime = TimeOnly.ParseExact("5:00 pm", "h:mm tt", CultureInfo.InvariantCulture);  // Custom format
+var theTime2 = TimeOnly.Parse("17:30:25", CultureInfo.InvariantCulture);
+
+Console.WriteLine(theTime.ToString("o", CultureInfo.InvariantCulture));     // Round-trip pattern.
+Console.WriteLine(theTime2.ToString("t", CultureInfo.InvariantCulture));    // Long time format
+Console.WriteLine(theTime2.ToLongTimeString());
+
+/* This example produces the following output:
+ * 
+ * 17:00:00.0000000
+ * 17:30
+ * 5:30:25 PM
+*/
+
+```
+
+## Check Strings for Null
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception.throwifnull?view=net-7.0)]</sup>
+
+```csharp
+public bool DoSomething(string id, string name, string data)
+{
+    ArgumentNullException.ThrowIfNull(id);
+    ArgumentNullException.ThrowIfNull(name);
+    ArgumentNullException.ThrowIfNull(data);
+}
+```
+
+## Process Data in Chunks
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.chunk?view=net-7.0)]</sup>
+
+Processing a list in small chunks
+
+```csharp
+sing System;
+
+class Program
+{
+	public static void Main()
+	{
+		// Iterate with chunks 
+		var list = Enumerable.Range(1, 30);
+		const int size = 10;
+		int chunkCounter = 0;
+		
+		foreach (var chunk in list.Chunk(size))
+		{
+			Console.WriteLine($"CHUNK: #{chunkCounter++}");
+			foreach (var item in chunk)
+			{
+				Console.WriteLine($"-> {item}");
+			}
+		}
+	}
+}
+```
+
+## LINQ Extensions
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs]()]</sup>
+
+New extension methods have been added to LINQ as well including MaxBy, MinBy, DistinctBy, IntersectBy, ExceptBy, and UnionBy.
+
+```csharp
+// https://keyholesoftware.com/2021/12/16/linq-improvements-new-features-in-c-10/
+public class Character 
+{
+    public int Id {get;set;}
+    public string Name {get;set;}
+    public int Age {get;set;}
+}
+ 
+ 
+List<Character> newHopeCharacters =
+    new()
+    {
+        new() { Id = 1, Name = "Luke Skywalker", Age = 19 },
+        new() { Id = 2, Name = "Leia Organa", Age = 19 },
+        new() { Id = 3, Name = "Han Solo", Age = 32 },
+        new() { Id = 4, Name = "Darth Vader", Age = 45 },
+    };
+ 
+List<Character> empireStrikesBackCharacters =
+    new()
+    {
+        new() { Id = 1, Name = "Luke Skywalker", Age = 19 },
+        new() { Id = 2, Name = "Leia Organa", Age = 19 },
+        new() { Id = 3, Name = "Han Solo", Age = 32 },
+        new() { Id = 4, Name = "Darth Vader", Age = 45 },
+        new() { Id = 5, Name = "Emperor Palpatine", Age = 88 },
+        new() { Id = 6, Name = "Boba Fett", Age = 35 }
+    };
+
+// MaxBy
+var maxByAge = newHopeCharacters.MaxBy(character => character.Age);
+
+// MinBy
+var minAge = newHopeCharacters.Min(character => character.Age);
+
+// DistinctBy
+var distinctCharacters = newHopeCharacters.DistinctBy(character => character.Age);
+
+// IntersectBy
+var intersection = newHopeCharacters.IntersectBy(empireStrikesBackCharacters.Select(character => character.Id), character => character.Id);
+
+// ExceptBy
+var exceptions = empireStrikesBackCharacters.ExceptBy(newHopeCharacters.Select(character => character.Id), character => character.Id);
+
+// UnionBy
+var union = empireStrikesBackCharacters.UnionBy(newHopeCharacters, character => character.Age);
+
+// Defining default value
+var found = newHopeCharacters.FirstOrDefault(x => x.Id == 1, new() { Id = 1, Name = "Not a character", Age = 0 });
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## PriorityQueue
+
+<sup>[[C# 10.0](#csharp-10)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2?view=net-7.0)]</sup>
+
+PriorityQueue, each element is provided with information about its priority.
+
+If an element is to be fetched from the queue, a check is made to determine which of the elements has the highest priority, and this is delivered, irrespective of when it was added to the queue.
+
+```csharp
+// https://medium.com/codex/the-most-important-new-features-of-c-10-and-how-to-use-them-9d8a8519c0c4
+using System;
+
+class Program
+{
+	public static void Main()
+	{
+		var queue = new PriorityQueue<string, int>();
+		
+		queue.Enqueue("Element 1", 9);
+		queue.Enqueue("Element 2", 11);
+		queue.Enqueue("Element 3", 27);
+		queue.Enqueue("Element 4", 7);
+		queue.Enqueue("Element 5", 13);
+		queue.Enqueue("Element 6", 0);
+		
+		while (queue.TryDequeue(out string element, out int priority))
+			Console.WriteLine($"element: {element} - priority: {priority}");
+	}
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
