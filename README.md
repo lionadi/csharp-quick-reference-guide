@@ -170,6 +170,16 @@
   - [LINQ Extensions](#linq-extensions)
   - [PriorityQueue](#priorityqueue)
 
+- <a name="csharp-11"></a>C# 11.0
+  - [Require Members](#require-members)
+  - [Raw string literals](#raw-string-literals)
+  - [Generic Attributes](#generic-attributes)
+  - [Extended nameof scope](#extended-nameof-scope)
+  - [Pattern match on a constant string](#pattern-match-on-a-constant-string)
+  - [Auto-default struct](#auto-default-struct)
+  - [List patterns](#list-patterns)
+  - [UTF-8 string literals](#utf-8-string-literals)
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Hello World
@@ -3752,6 +3762,284 @@ class Program
 			Console.WriteLine($"element: {element} - priority: {priority}");
 	}
 }
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Require Members
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#required-members)]</sup>
+
+You can add the required modifier to properties and fields to enforce constructors and callers to initialize those values. The System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute can be added to constructors to inform the compiler that a constructor initializes all required members.
+
+```csharp
+public class Person
+{
+    public Person() { }
+
+    [SetsRequiredMembers]
+    public Person(string firstName, string lastName) =>
+        (FirstName, LastName) = (firstName, lastName);
+
+    public required string FirstName { get; init; }
+    public required string LastName { get; init; }
+
+    public int? Age { get; set; }
+}
+
+public class Student : Person
+{
+    public Student() : base()
+    {
+    }
+
+    [SetsRequiredMembers]
+    public Student(string firstName, string lastName) :
+        base(firstName, lastName)
+    {
+    }
+
+    public double GPA { get; set; }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Raw string literals
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#raw-string-literals)]</sup>
+
+Raw string literals are a new format for string literals. Raw string literals can contain arbitrary text, including whitespace, new lines, embedded quotes, and other special characters without requiring escape sequences. A raw string literal starts with at least three double-quote (""") characters. It ends with the same number of double-quote characters. Typically, a raw string literal uses three double quotes on a single line to start the string, and three double quotes on a separate line to end the string. The newlines following the opening quote and preceding the closing quote aren't included in the final content:
+
+```csharp
+string longMessage = """
+    This is a long message.
+    It has several lines.
+        Some are indented
+                more than others.
+    Some should start at the first column.
+    Some have "quoted text" in them.
+    """;
+```
+Any whitespace to the left of the closing double quotes will be removed from the string literal. Raw string literals can be combined with string interpolation to include braces in the output text. Multiple $ characters denote how many consecutive braces start and end the interpolation:
+
+```csharp
+var location = $$"""
+   You are at {{{Longitude}}, {{Latitude}}}
+   """;
+```
+The preceding example specifies that two braces start and end an interpolation. The third repeated opening and closing brace are included in the output string.
+
+Other exmaples:
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#raw-string-literals
+// C# 10
+string name = "Shehryar";
+string surname = "Khan";
+
+string jsonString = 
+  $@"
+  {{
+    'Name': {name},
+    'Surname': {surname}
+  }}
+  ";
+
+// C# 11
+string name = "Shehryar";
+string surname = "Khan";
+
+string jsonString = 
+  $$"""
+  {
+    "Name": {{name}},
+    "Surname": {{surname}}
+  }
+  """;
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Generic Attributes
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#generic-attributes)]</sup>
+
+You can declare a generic class whose base class is System.Attribute. This feature provides a more convenient syntax for attributes that require a System.Type parameter. 
+
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#generic-attributes
+// C# 10
+class MyType 
+{ }
+
+class MyAttribute : Attribute
+{
+  private Type type;
+  
+  public MyAttribute(Type type)
+  {
+    _type = type;
+  }
+}
+
+[MyAttribute(typeof(MyType))] 
+class Myclass {}
+
+// C# 11
+class MyType
+{ }
+
+class GenericAttribute<T> : Attribute
+  where T : MyType
+{
+  private T _type;
+}
+
+[GenericAttribute<MyType>] 
+class MyClass
+{ }
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Extended nameof scope
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#extended-nameof-scope)]</sup>
+
+Type parameter names and parameter names are now in scope when used in a nameof expression in an attribute declaration on that method. This feature means you can use the nameof operator to specify the name of a method parameter in an attribute on the method or parameter declaration. This feature is most often useful to add attributes for nullable analysis.
+
+You can specify the name of a method parameter in an attribute on the parameter declaration or method.
+
+This can be used in adding attributes for code analysis.
+
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#extended-nameof-scope
+public class MyAttr : Attribute
+{
+  private readonly string _paramName; 
+  
+  public MyAttr(string paramName)
+  { 
+    _paramName = paramName;
+  }
+}
+
+public class MyClass
+{
+  [MyAttr(nameof(param))]
+  public void Method(int param, [MyAttr(nameof(param))] int anotherParam)
+  { }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Pattern match on a constant string
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#pattern-match-spanchar-or-readonlyspanchar-on-a-constant-string)]</sup>
+
+You've been able to test if a string had a specific constant value using pattern matching for several releases. Now, you can use the same pattern matching logic with variables that are Span<char> or ReadOnlySpan<char>.
+
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#pattern-match-spanchar-on-a-constant-string
+// C# 10
+ReadOnlySpan<char> strSpan = "SK".AsSpan();
+if (strSpan == "SK")
+{
+  Console.WriteLine("Hey, SK");
+}
+
+// C# 11
+ReadOnlySpan<char> strSpan = "SK".AsSpan();
+if (strSpan is "SK")
+{
+  Console.WriteLine("Hey, SK");
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Auto-default struct
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#auto-default-struct)]</sup>
+
+The C# 11 compiler ensures that all fields of a struct type are initialized to their default value as part of executing a constructor. This change means any field or auto property not initialized by a constructor is automatically initialized by the compiler. Structs where the constructor doesn't definitely assign all fields now compile, and any fields not explicitly initialized are set to their default value.
+
+```csharp
+public readonly struct Measurement
+{
+    public Measurement(double value)
+    {
+        Value = value;
+    }
+
+    public Measurement(double value, string description)
+    {
+        Value = value;
+        Description = description;
+    }
+
+    public Measurement(string description)
+    {
+        Description = description;
+    }
+
+    public double Value { get; init; }
+    public string Description { get; init; } = "Ordinary measurement";
+
+    public override string ToString() => $"{Value} ({Description})";
+}
+
+public static void Main()
+{
+    var m1 = new Measurement(5);
+    Console.WriteLine(m1);  // output: 5 (Ordinary measurement)
+
+    var m2 = new Measurement();
+    Console.WriteLine(m2);  // output: 0 ()
+
+    var m3 = default(Measurement);
+    Console.WriteLine(m3);  // output: 0 ()
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## List patterns
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#list-patterns)]</sup>
+
+List patterns extend pattern matching to match sequences of elements in a list or an array. For example, sequence is [1, 2, 3] is true when the sequence is an array or a list of three integers (1, 2, and 3). You can match elements using any pattern, including constant, type, property and relational patterns. The discard pattern (_) matches any single element, and the new range pattern (..) matches any sequence of zero or more elements.
+
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#list-patterns
+var numbers = new [] { 1, 2, 3, 4 };
+// List and constant patterns 
+Console.WriteLine(numbers is [1, 2, 3, 4]); // True 
+Console.WriteLine(numbers is [1, 2, 4]); // False
+// List and discard patterns 
+Console.WriteLine(numbers is [_, 2, _, 4]); // True 
+Console.WriteLine(numbers is [.., 3, _]); // True
+// List and logical patterns 
+Console.WriteLine(numbers is [_, >=2, _, _]); // True
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## UTF-8 string literals
+
+<sup>[[C# 11.0](#csharp-11)]</sup> <sup>[[Oficial docs](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#utf-8-string-literals)]</sup>
+
+You can specify the u8 suffix on a string literal to specify UTF-8 character encoding. If your application needs UTF-8 strings, for HTTP string constants or similar text protocols, you can use this feature to simplify the creation of UTF-8 strings.
+
+```csharp
+// https://dottutorials.net/whats-new-csharp-11-features/#utf-8-string-literals
+// C# 10
+byte[] array = Encoding.UTF8.GetBytes("Hello World");
+
+// C# 11
+byte[] array = "Hello World";
 ```
 
 **[⬆ back to top](#table-of-contents)**
